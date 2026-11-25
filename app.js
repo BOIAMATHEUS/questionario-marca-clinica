@@ -438,12 +438,21 @@ function dados() {
   };
 }
 const b64 = blob => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(String(fr.result).split(',')[1]); fr.onerror = rej; fr.readAsDataURL(blob); });
-async function post(corpo) {
-  const r = await fetch(CONFIG.envio, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) });
-  const j = await r.json().catch(() => ({}));
-  if (!r.ok || !j.ok) throw new Error(j.erro || ('HTTP ' + r.status));
-  return j;
+async function post(corpo, tentativas = 4) {
+  let ultimo;
+  for (let i = 0; i < tentativas; i++) {
+    try {
+      const r = await fetch(CONFIG.envio, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) });
+      const j = await r.json().catch(() => ({}));
+      if (r.ok && j.ok) return j;
+      ultimo = new Error(j.erro || ('HTTP ' + r.status));
+      if (r.status === 400 || r.status === 413) break;
+    } catch (e) { ultimo = e; }
+    await new Promise(res => setTimeout(res, 1500 * (i + 1)));
+  }
+  throw ultimo || new Error('sem resposta');
 }
+const zapLink = () => 'https://wa.me/55' + CONFIG.whatsapp.replace(/\D/g, '') + '?text=' + encodeURIComponent(resumo().slice(0, 3500));
 const carimbo = () => { const d = new Date(); const z = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${z(d.getMonth() + 1)}-${z(d.getDate())}_${z(d.getHours())}-${z(d.getMinutes())}-${z(d.getSeconds())}`; };
 async function enviar() {
   const bt = $('#enviar'); const s = $('#st'); bt.disabled = true;
@@ -453,12 +462,12 @@ async function enviar() {
     const lotes = [[]]; let tam = 0;
     for (const a of st.arqs) {
       let b = blobs[a.id]; if (!b) { try { b = await idb.get(a.id); } catch {} } if (!b) continue;
-      if (lotes.at(-1).length && (tam + b.size > 6e6 || lotes.at(-1).length >= 6)) { lotes.push([]); tam = 0; }
+      if (lotes.at(-1).length) { lotes.push([]); tam = 0; }
       lotes.at(-1).push([a, b]); tam += b.size;
     }
     const cheios = lotes.filter(l => l.length);
     for (let i = 0; i < cheios.length; i++) {
-      s.textContent = `Enviando arquivos (${i + 1} de ${cheios.length})...`;
+      s.textContent = `Enviando arquivo ${i + 1} de ${cheios.length}...`;
       const arquivos = await Promise.all(cheios[i].map(async ([a, b]) => ({ nome: a.n, sec: a.sec || 'upload', b64: await b64(b) })));
       const j = await post({ tipo: 'arquivos', envio, arquivos });
       cheios[i].forEach(([a], k) => { a.caminho = j.caminhos?.[k] || null; });
@@ -470,7 +479,7 @@ async function enviar() {
     rerender(); toast('Enviado. Obrigado!');
   } catch (err) {
     bt.disabled = false;
-    s.textContent = `Não consegui enviar agora (${err.message}). Tente de novo em instantes ou toque em "Copiar resumo" e mande pelo WhatsApp ${CONFIG.whatsapp}.`;
+    s.innerHTML = `Não consegui enviar agora. Suas respostas continuam salvas neste celular: tente de novo em instantes. Se não der, mande o resumo pelo WhatsApp:<br><a class="btn zap" href="${zapLink()}" target="_blank" rel="noopener">Mandar resumo pelo WhatsApp</a>`;
   }
 }
 /* rascunho de segurança: grava o que já foi respondido, no máximo a cada 3 minutos */

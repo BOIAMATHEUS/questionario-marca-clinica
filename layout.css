@@ -71,3 +71,7 @@ body.digitando .tabs,body.digitando .nomebox{top:62px}
 .fim{margin-top:28px;display:flex;justify-content:flex-end}
 .fim .btn{min-height:52px;padding-inline:26px}
 @media(max-width:520px){.fim .btn{width:100%}}
+
+/* plano B do envio */
+.envbox .st .zap{display:flex;margin-top:12px;background:#25D366;color:#0b2b17}
+.envbox .st .zap:hover{background:#1fb457}
