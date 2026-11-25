@@ -1,1 +1,0 @@
-TESTE do Claude, pode apagar
