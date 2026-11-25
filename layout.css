@@ -66,3 +66,8 @@ body.digitando .tabs,body.digitando .nomebox{top:62px}
   .mp .cor,.mp .cor label,.mp .mais{width:64px}
   .mp .cor label,.mp .mais{height:64px}
 }
+
+/* botão de avançar no fim de cada etapa */
+.fim{margin-top:28px;display:flex;justify-content:flex-end}
+.fim .btn{min-height:52px;padding-inline:26px}
+@media(max-width:520px){.fim .btn{width:100%}}

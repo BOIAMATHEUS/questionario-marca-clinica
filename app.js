@@ -204,7 +204,7 @@ function stepHTML(i) {
   const largo = ['logo', 'cores', 'fontes', 'clima', 'simbolos', 'personalidade'].includes(s.id);
   if (s.id === 'personalidade') blocos = `<div class="pers">${blocos}</div>`;
   const total = STEPS.filter(x => x.blocks).length;
-  return `<section class="etapa ${largo ? 'larga' : 'estreita'}"><p class="kick">Etapa ${+s.num} de ${total}<span class="min">· cerca de ${s.min} min</span></p><h2>${esc(s.titulo[0])}<em>${esc(s.titulo[1])}</em></h2>${s.lead ? `<p class="lead">${esc(s.lead)}</p>` : ''}<div class="blocos ${largo ? '' : 'numerar'}">${blocos}</div></section>`;
+  return `<section class="etapa ${largo ? 'larga' : 'estreita'}"><p class="kick">Etapa ${+s.num} de ${total}<span class="min">· cerca de ${s.min} min</span></p><h2>${esc(s.titulo[0])}<em>${esc(s.titulo[1])}</em></h2>${s.lead ? `<p class="lead">${esc(s.lead)}</p>` : ''}<div class="blocos ${largo ? '' : 'numerar'}">${blocos}</div>${STEPS[i + 1] ? `<div class="fim"><button type="button" class="btn" data-go="${i + 1}">${STEPS[i + 1].id === 'envio' ? 'Revisar e enviar' : 'Próxima etapa: ' + esc(STEPS[i + 1].t)} ${ICON.seta}</button></div>` : ''}</section>`;
 }
 function abertura() {
   return `<section class="etapa estreita abre"><p class="kick">Questionário de marca · Vinicius · Clínica de psicologia</p><h1>Vamos construir<em>a marca da clínica</em></h1>
