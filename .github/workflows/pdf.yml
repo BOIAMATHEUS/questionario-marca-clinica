@@ -1,0 +1,51 @@
+name: PDF do questionário
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'respostas/**/respostas.json'
+      - '!respostas/_rascunho/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: pdf-questionario
+  cancel-in-progress: false
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Gerar o PDF dos envios novos
+        id: gerar
+        run: node tools/pdf.mjs
+
+      - name: Salvar o PDF no repositório
+        if: steps.gerar.outputs.pdfs != ''
+        run: |
+          git config user.name "questionario-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add respostas
+          git commit -m "PDF do questionário"
+          git pull --rebase origin main
+          git push
+
+      - name: Avisar por e-mail (issue no repositório)
+        if: steps.gerar.outputs.pdfs != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PDFS: ${{ steps.gerar.outputs.pdfs }}
+        run: |
+          corpo="O Vinicius enviou o questionário de marca."$'\n\n'
+          IFS='|' read -ra lista <<< "$PDFS"
+          for p in "${lista[@]}"; do
+            url="https://github.com/${GITHUB_REPOSITORY}/blob/main/$(printf '%s' "$p" | sed 's/ /%20/g')"
+            corpo+="PDF: ${url}"$'\n'
+          done
+          gh issue create --title "Questionário recebido" --body "$corpo"

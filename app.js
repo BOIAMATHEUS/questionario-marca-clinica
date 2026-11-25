@@ -427,44 +427,61 @@ function resumo() {
   }
   return L.join('\n');
 }
-function dadosForm(tipo) {
-  const p = new URLSearchParams(); const e = CONFIG.entry;
-  p.append(e.quando, new Date().toLocaleString('pt-BR')); p.append(e.tipo, tipo); p.append(e.nome, nomeAtual() || '(sem nome)');
-  p.append(e.resumo, resumo().slice(0, 45000));
-  p.append(e.json, JSON.stringify({ v: st.v, r: Object.fromEntries(Object.entries(st.r).filter(([, x]) => x && (x.v || x.c))), links: st.links, arqs: st.arqs.map(a => ({ n: a.n, c: a.c })) }).slice(0, 45000));
-  p.append(e.arquivos, st.arqs.map(a => a.n).join(', '));
-  return p;
+function dados() {
+  return {
+    versao: 2, clinica: nomeAtual() || '', quem: V('quem') || '', zap: V('zap') || '',
+    enviadoEm: new Date().toISOString(),
+    v: st.v,
+    r: Object.fromEntries(Object.entries(st.r).filter(([, x]) => x && (x.v || (x.c && x.c.trim())))),
+    links: st.links.filter(l => l.u.trim() || l.c.trim()),
+    arqs: st.arqs.map(a => ({ n: a.n, c: a.c, sec: a.sec || 'upload', t: a.t, caminho: a.caminho || null })),
+  };
 }
+const b64 = blob => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(String(fr.result).split(',')[1]); fr.onerror = rej; fr.readAsDataURL(blob); });
+async function post(corpo) {
+  const r = await fetch(CONFIG.envio, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || !j.ok) throw new Error(j.erro || ('HTTP ' + r.status));
+  return j;
+}
+const carimbo = () => { const d = new Date(); const z = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${z(d.getMonth() + 1)}-${z(d.getDate())}_${z(d.getHours())}-${z(d.getMinutes())}-${z(d.getSeconds())}`; };
 async function enviar() {
-  const bt = $('#enviar'); const s = $('#st'); bt.disabled = true; s.textContent = 'Enviando as respostas...';
+  const bt = $('#enviar'); const s = $('#st'); bt.disabled = true;
+  const envio = carimbo();
   try {
-    if (CONFIG.form) await fetch(CONFIG.form, { method: 'POST', mode: 'no-cors', body: dadosForm('final') });
-    /* cópia por e-mail com os arquivos, em lotes */
+    /* 1. arquivos, em lotes pequenos */
     const lotes = [[]]; let tam = 0;
-    for (const a of st.arqs) { let b = blobs[a.id]; if (!b) { try { b = await idb.get(a.id); } catch {} } if (!b) continue; if (tam + b.size > 6e6 || lotes.at(-1).length >= 5) { lotes.push([]); tam = 0; } lotes.at(-1).push([a, b]); tam += b.size; }
-    for (let i = 0; i < lotes.length; i++) {
-      s.textContent = lotes.length > 1 ? `Enviando arquivos (${i + 1} de ${lotes.length})...` : (st.arqs.length ? 'Enviando arquivos...' : 'Finalizando...');
-      const fd = new FormData();
-      fd.append('_subject', `Questionário de marca · ${nomeAtual() || 'Clínica'}${lotes.length > 1 ? ` · parte ${i + 1}/${lotes.length}` : ''}`);
-      fd.append('_captcha', 'false'); fd.append('_template', 'box');
-      fd.append('Clínica', nomeAtual() || '-'); fd.append('Quem respondeu', V('quem') || '-'); fd.append('WhatsApp', V('zap') || '-');
-      fd.append('Resumo', i === 0 ? resumo() : '(continuação: só arquivos)');
-      lotes[i].forEach(([a, b], j) => { fd.append('attachment' + (j ? j : ''), b, a.n); fd.append('Arquivo ' + (j + 1), a.n + (a.c ? ' · ' + a.c : '')); });
-      if (CONFIG.arquivosPara) await fetch(CONFIG.arquivosPara, { method: 'POST', mode: 'no-cors', body: fd });
+    for (const a of st.arqs) {
+      let b = blobs[a.id]; if (!b) { try { b = await idb.get(a.id); } catch {} } if (!b) continue;
+      if (lotes.at(-1).length && (tam + b.size > 6e6 || lotes.at(-1).length >= 6)) { lotes.push([]); tam = 0; }
+      lotes.at(-1).push([a, b]); tam += b.size;
     }
+    const cheios = lotes.filter(l => l.length);
+    for (let i = 0; i < cheios.length; i++) {
+      s.textContent = `Enviando arquivos (${i + 1} de ${cheios.length})...`;
+      const arquivos = await Promise.all(cheios[i].map(async ([a, b]) => ({ nome: a.n, sec: a.sec || 'upload', b64: await b64(b) })));
+      const j = await post({ tipo: 'arquivos', envio, arquivos });
+      cheios[i].forEach(([a], k) => { a.caminho = j.caminhos?.[k] || null; });
+    }
+    /* 2. respostas por último: é isso que dispara o PDF */
+    s.textContent = 'Enviando as respostas...';
+    await post({ tipo: 'final', envio, dados: dados(), resumo: resumo() });
     st.enviado.push(new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })); st.alterado = false; save();
     rerender(); toast('Enviado. Obrigado!');
   } catch (err) {
-    bt.disabled = false; s.textContent = `Não consegui enviar agora. Tentem de novo ou toquem em "Copiar resumo" e mandem pelo WhatsApp ${CONFIG.whatsapp}.`;
+    bt.disabled = false;
+    s.textContent = `Não consegui enviar agora (${err.message}). Tente de novo em instantes ou toque em "Copiar resumo" e mande pelo WhatsApp ${CONFIG.whatsapp}.`;
   }
 }
-/* rascunho de segurança: se a pessoa sair no meio, o que já respondeu chega para mim */
+/* rascunho de segurança: grava o que já foi respondido, no máximo a cada 3 minutos */
 let ultimoRasc = 0;
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState !== 'hidden' || !st.alterado || !CONFIG.form || Date.now() - ultimoRasc < 60e3) return;
+function rascunho() {
+  if (!st.alterado || !CONFIG.envio || Date.now() - ultimoRasc < 180e3) return;
   ultimoRasc = Date.now();
-  try { navigator.sendBeacon(CONFIG.form, dadosForm('rascunho')); } catch {}
-});
+  try { fetch(CONFIG.envio, { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tipo: 'rascunho', dados: dados(), resumo: resumo() }) }).catch(() => {}); } catch {}
+}
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') rascunho(); });
+setInterval(rascunho, 60e3);
 
 /* ---------- início ---------- */
 fetch('refs.json').then(r => r.json()).then(j => { REFS = j.map(r => ({ ...r, id: r.file.replace(/^.*\//, '').replace(/\.\w+$/, '') })); go(cur, false); }).catch(() => go(cur, false));
