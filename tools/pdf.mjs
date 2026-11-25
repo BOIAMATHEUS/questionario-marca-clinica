@@ -131,7 +131,7 @@ section{margin-bottom:9mm}
 .sh{display:flex;align-items:baseline;gap:4mm;border-bottom:1.4px solid #1d1b19;padding-bottom:2.5mm;margin-bottom:5mm;break-after:avoid}
 .sh span{font-family:'Bebas Neue';font-size:22pt;color:#007D68;line-height:1}
 h2{font-family:'Bebas Neue';font-weight:400;font-size:22pt;line-height:1;letter-spacing:.01em}
-h4{font-size:8pt;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#007D68;margin:5mm 0 3mm}
+h4{break-after:avoid;page-break-after:avoid;font-size:8pt;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#007D68;margin:5mm 0 3mm}
 h4 small{color:#8a8273;font-weight:600}
 .qa{margin-bottom:5mm;break-inside:avoid}
 .q{font-weight:700;font-size:10pt;margin-bottom:1.2mm}
