@@ -25,7 +25,7 @@ function save() {
   st.alterado = true; st.t = Date.now();
   try { localStorage.setItem(KEY, JSON.stringify(st)); } catch {}
   const s = $('#salvo'); s.style.opacity = .4; clearTimeout(tSalvo); tSalvo = setTimeout(() => s.style.opacity = 1, 250);
-  passos();
+  clearTimeout(save._p); save._p = setTimeout(marcaPassos, 400);
 }
 function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('on'), 2600); }
 
@@ -45,7 +45,7 @@ async function comprimir(file) {
     return b && b.size < file.size ? new File([b], file.name.replace(/\.\w+$/, '') + '.jpg', { type: 'image/jpeg' }) : file;
   } catch { return file; }
 }
-async function addArquivos(files) {
+async function addArquivos(files, sec = 'upload') {
   for (const f0 of files) {
     if (st.arqs.length >= 20) { toast('Até 20 arquivos por aqui. O resto pode ir pelo WhatsApp.'); break; }
     if (!/^image\/|application\/pdf/.test(f0.type)) { toast('Envie imagens ou PDF.'); continue; }
@@ -54,7 +54,7 @@ async function addArquivos(files) {
     const id = 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
     try { await idb.put(id, f); } catch {}
     blobs[id] = f;
-    st.arqs.push({ id, n: f.name, s: f.size, t: f.type, c: '' });
+    st.arqs.push({ id, n: f.name, s: f.size, t: f.type, c: '', sec });
   }
   save(); rerender();
 }
@@ -63,7 +63,7 @@ async function addArquivos(files) {
 const V = id => st.v[id];
 const nomeAtual = () => (V('nome') || '').trim();
 function campo(b, inner) {
-  return `<div class="campo" id="f-${b.id}">${b.label ? `<label for="i-${b.id}">${esc(b.label)}</label>` : ''}${b.help ? `<p class="help">${esc(b.help)}</p>` : ''}${inner}${b.ex ? `<div class="ex"><b>Exemplo</b>${esc(b.ex)}</div>` : ''}</div>`;
+  return `<div class="campo" id="f-${b.id}">${b.label ? `<label for="i-${b.id}">${esc(b.label)}${b.opc ? ' <span class="opc">Opcional</span>' : ''}</label>` : ''}${b.help ? `<p class="help">${esc(b.help)}</p>` : ''}${inner}${b.ex ? `<div class="ex"><b>Exemplo</b>${esc(b.ex)}</div>` : ''}</div>`;
 }
 function rate(key, labels = ['Amei', 'Talvez', 'Não']) {
   const v = st.r[key]?.v;
@@ -96,20 +96,20 @@ const R = {
   },
   nome: () => {
     const s = V('nome_status');
-    const ops = [['tem', 'Já temos o nome'], ['opcoes', 'Temos algumas opções'], ['nao', 'Ainda não temos']];
+    const ops = [['tem', 'Já tenho o nome'], ['opcoes', 'Tenho algumas opções'], ['nao', 'Ainda não tenho']];
     let extra = '';
     if (s === 'tem') extra = `<input type="text" id="i-nome" data-f="nome" value="${esc(V('nome'))}" placeholder="Nome da clínica" style="margin-top:14px">`;
-    if (s === 'opcoes') extra = `<p class="help" style="margin-top:14px">Escrevam as opções, uma por linha, e digam qual é a favorita.</p><textarea data-f="nome_opcoes" placeholder="Uma opção por linha">${esc(V('nome_opcoes'))}</textarea><input type="text" data-f="nome" value="${esc(V('nome'))}" placeholder="A favorita, por enquanto" style="margin-top:10px">`;
+    if (s === 'opcoes') extra = `<p class="help" style="margin-top:14px">Escreva as opções, uma por linha, e diga qual é a favorita.</p><textarea data-f="nome_opcoes" placeholder="Uma opção por linha">${esc(V('nome_opcoes'))}</textarea><input type="text" data-f="nome" value="${esc(V('nome'))}" placeholder="A favorita, por enquanto" style="margin-top:10px">`;
     if (s === 'nao') {
       const d = V('nome_dir') || [];
-      extra = `<p class="help" style="margin-top:16px">O nome precisa estar definido antes do logo. Estes caminhos ajudam a pensar: marquem os que agradam.</p><div class="tipos">${NOMES_DIRECOES.map(n => `<button type="button" class="tipo ${d.includes(n.id) ? 'on' : ''}" data-ndir="${n.id}"><div><b>${esc(n.nome)}</b><small>${esc(n.d)}</small><small style="margin-top:6px;color:var(--g2);font-style:italic">${esc(n.ex)}</small></div></button>`).join('')}</div><p class="help" style="margin-top:16px">Palavras, ideias ou sons que vocês gostariam no nome:</p><textarea data-f="nome_palavras" placeholder="Escreva aqui">${esc(V('nome_palavras'))}</textarea>`;
+      extra = `<p class="help" style="margin-top:16px">O nome precisa estar definido antes do logo. Estes caminhos ajudam a pensar: marque os que agradam.</p><div class="tipos">${NOMES_DIRECOES.map(n => `<button type="button" class="tipo ${d.includes(n.id) ? 'on' : ''}" data-ndir="${n.id}"><div><b>${esc(n.nome)}</b><small>${esc(n.d)}</small><small style="margin-top:6px;color:var(--g2);font-style:italic">${esc(n.ex)}</small></div></button>`).join('')}</div><p class="help" style="margin-top:16px">Palavras, ideias ou sons que você gostaria no nome:</p><textarea data-f="nome_palavras" placeholder="Escreva aqui">${esc(V('nome_palavras'))}</textarea>`;
     }
-    return `<div class="campo" id="f-nome"><span class="lbl">Qual é o nome da clínica?</span><div class="chips">${ops.map(([k, t]) => `<button type="button" class="chip ${s === k ? 'on' : ''}" data-nst="${k}">${t}</button>`).join('')}</div>${extra}<div class="ex"><b>Exemplo</b>Clareira · Psicologia Integrada</div></div>`;
+    return `<div class="campo" id="f-nome"><span class="lbl">Qual é o nome da clínica?</span><div class="chips">${ops.map(([k, t]) => `<button type="button" class="chip ${s === k ? 'on' : ''}" data-nst="${k}">${t}</button>`).join('')}</div>${extra}<div class="ex"><b>Exemplo</b>Clareira · Psicologia Clínica</div></div>`;
   },
   tipos: () => {
     const sel = V('tipos') || [];
     const cats = Object.keys(CATS).filter(c => c !== 'ambiente' && c !== 'sistema');
-    return `<div class="campo"><span class="lbl">Que tipo de logo vocês imaginam?</span><p class="help">Marquem até 3. Logo abaixo tem exemplos reais de cada tipo.</p><div class="tipos">${cats.map(c => { const f = REFS.find(r => r.cat === c); return `<button type="button" class="tipo ${sel.includes(c) ? 'on' : ''}" data-tipo="${c}"><span class="ti" style="${f ? `background-image:url('img/${esc(f.file)}')` : ''}"></span><div><b>${esc(CATS[c].t)}</b><small>${esc(CATS[c].d)}</small></div></button>`; }).join('')}</div></div>`;
+    return `<div class="campo"><span class="lbl">Que tipo de logo você imagina?</span><p class="help">Marque até 3. Logo abaixo tem exemplos reais de cada tipo.</p><div class="tipos">${cats.map(c => { const f = REFS.find(r => r.cat === c); return `<button type="button" class="tipo ${sel.includes(c) ? 'on' : ''}" data-tipo="${c}"><span class="ti" style="${f ? `background-image:url('img/${esc(f.file)}')` : ''}"></span><div><b>${esc(CATS[c].t)}</b><small>${esc(CATS[c].d)}</small></div></button>`; }).join('')}</div></div>`;
   },
   galeria: b => {
     const cats = b.cats.filter(c => REFS.some(r => r.cat === c));
@@ -119,7 +119,7 @@ const R = {
     const avaliadas = REFS.filter(r => b.cats.includes(r.cat) && st.r['ref:' + r.id]?.v).length;
     const total = REFS.filter(r => b.cats.includes(r.cat)).length;
     return `<div>${cats.length > 1 ? `<div class="tabs" data-gal="${b.id}">${cats.map(c => { const n = REFS.filter(r => r.cat === c).length; const a = REFS.filter(r => r.cat === c && st.r['ref:' + r.id]?.v).length; return `<button type="button" class="${c === at ? 'at' : ''}" data-tab="${c}">${esc(CATS[c].t)}<small>${a}/${n}</small></button>`; }).join('')}</div><p class="catd">${esc(CATS[at].d)}</p>` : ''}
-      <div class="grid">${lista.map(card).join('')}</div>
+      <div class="carwrap"><div class="grid car" data-car>${lista.map(card).join('')}</div><div class="carnav"><button type="button" class="seta" data-carmove="-1" aria-label="Anterior">${ICON.volta}</button><span class="carpos" data-carpos>1 de ${lista.length}</span><button type="button" class="seta" data-carmove="1" aria-label="Próxima">${ICON.seta}</button></div></div>
       <p class="resumo-rate">${avaliadas} de ${total} referências avaliadas${cats.length > 1 && cats.indexOf(at) < cats.length - 1 ? ` · <button type="button" data-tabnext="${b.id}" style="color:var(--g);font-weight:700">Próximo tipo: ${esc(CATS[cats[cats.indexOf(at) + 1]].t)} →</button>` : ''}</p></div>`;
   },
   simbolos: () => `<div class="simbs">${SIMBOLOS.map(s => { const v = st.r['simb:' + s.id]?.v; return `<div class="simb ${v || ''}" data-card="simb:${s.id}"><svg viewBox="0 0 48 48" aria-hidden="true">${s.svg}</svg><b>${esc(s.nome)}</b>${rate('simb:' + s.id, ['Sim', 'Talvez', 'Não'])}</div>`; }).join('')}</div>`,
@@ -127,7 +127,7 @@ const R = {
     const sel = V('combo') || []; const S = id => SIMBOLOS.find(x => x.id === id);
     const g = (id, cor, tr = '') => `<g transform="${tr}" style="color:${cor}">${S(id).svg}</g>`;
     const cores = ['#161616', '#007D68', '#B9684B'];
-    let prev = '<p class="help" style="margin:14px 0 0">Escolham 2 ou 3 símbolos acima para ver a combinação aqui.</p>';
+    let prev = '<p class="help" style="margin:14px 0 0">Escolha 2 ou 3 símbolos acima para ver a combinação aqui.</p>';
     if (sel.length >= 2) {
       const n = sel.length;
       const lado = `<svg viewBox="0 0 ${48 * n} 48">${sel.map((id, i) => g(id, cores[i], `translate(${48 * i} 0)`)).join('')}</svg>`;
@@ -135,40 +135,60 @@ const R = {
       const selo = `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" style="color:#161616"/>${sel.map((id, i) => g(id, cores[i], 'translate(10.8 10.8) scale(.55)')).join('')}</svg>`;
       prev = `<div class="cprev">${[['Lado a lado', lado], ['Sobrepostos', sobre], ['Num selo', selo]].map(([t, v]) => `<div><div class="cv">${v}</div><small>${t}</small></div>`).join('')}</div><p class="help" style="margin-top:10px">É só um esboço para despertar ideias. No logo, os desenhos se fundem numa forma única.</p>`;
     }
-    if (!st.comboAberto && !sel.length && !V('combo_c')) return `<div class="campo" id="f-combo"><span class="lbl">Querem experimentar juntar símbolos? <span class="opc">Opcional</span></span><p class="help">Se tiverem curiosidade, dá para misturar dois ou três desenhos e ver uma ideia nova. Se não, é só seguir para as cores.</p><button type="button" class="add" data-comboabrir>Experimentar combinações</button></div>`;
-    return `<div class="campo" id="f-combo"><span class="lbl">Experimentem juntar símbolos <span class="opc">Opcional</span></span><p class="help">Toquem em até 3. A ordem do toque define as cores.</p>
+    if (!st.comboAberto && !sel.length && !V('combo_c')) return `<div class="campo" id="f-combo"><span class="lbl">Quer experimentar juntar símbolos? <span class="opc">Opcional</span></span><p class="help">Se tiver curiosidade, dá para misturar dois ou três desenhos e ver uma ideia nova. Se não, é só seguir para as cores.</p><button type="button" class="add" data-comboabrir>Experimentar combinações</button></div>`;
+    return `<div class="campo" id="f-combo"><span class="lbl">Experimente juntar símbolos <span class="opc">Opcional</span></span><p class="help">Toque em até 3. A ordem do toque define as cores.</p>
       <div class="chips cpick">${SIMBOLOS.map(x => { const k = sel.indexOf(x.id); return `<button type="button" class="chip ${k > -1 ? 'on' : ''}" data-comb="${x.id}"><svg viewBox="0 0 48 48" aria-hidden="true">${x.svg}</svg>${esc(x.nome)}</button>`; }).join('')}</div>
       ${prev}
-      <p class="help" style="margin:18px 0 8px"><b style="color:var(--ink)">Ideias para começar</b> · toquem para ver</p>
+      <p class="help" style="margin:18px 0 8px"><b style="color:var(--ink)">Ideias para começar</b> · toque para ver</p>
       <div class="cex">${COMBOS.map((c, i) => `<button type="button" data-cex="${i}"><span><svg viewBox="0 0 48 48">${c.s.map((id, j) => `<g style="color:${cores[j]}">${S(id).svg}</g>`).join('')}</svg></span><b>${c.s.map(id => S(id).nome).join(' + ')}</b><small>${esc(c.d)}</small></button>`).join('')}</div>
-      <label for="i-combo_c" style="margin-top:18px">Como vocês imaginam essa junção?</label>
+      <label for="i-combo_c" style="margin-top:18px">Como você imagina essa junção?</label>
       <textarea id="i-combo_c" data-f="combo_c" placeholder="Escreva aqui">${esc(V('combo_c'))}</textarea>
-      <div class="ex"><b>Exemplo</b>Gostamos da folha saindo de dentro dos elos: a equipe junta e o paciente crescendo. Mas sem ficar com cara de marca de produto natural.</div></div>`;
+      <div class="ex"><b>Exemplo</b>Gosto da folha saindo de dentro dos elos: o vínculo fazendo a pessoa crescer. Mas sem cara de marca de produto natural.</div></div>`;
   },
   paletas: () => `<div class="pals">${PALETAS.map(p => { const v = st.r['pal:' + p.id]?.v; const c = p.cores.map(x => x[0]); const nm = nomeAtual() || 'Sua clínica';
     return `<article class="pal ${v || ''}" data-card="pal:${p.id}"><h3>${esc(p.nome)}</h3><p class="cl">${esc(p.clima)}</p>
       <div class="barra">${p.cores.map(x => `<span style="background:${x[0]};flex:${x[2]}"></span>`).join('')}</div>
       <div class="hexes">${p.cores.map(x => `<div><b>${esc(x[1])}</b>${x[0]}</div>`).join('')}</div>
-      <div class="mocks"><div class="mcard" style="background:${c[0]};color:${c[3]}"><div class="mk"><i style="background:${c[1]}"></i><b data-nomevivo>${esc(nm)}</b></div><small style="color:${c[3]};opacity:.75">Psicologia<br>Atendimento presencial e online</small></div>
-      <div class="mpost" style="background:${c[1]};color:${c[0]}"><span class="bola" style="background:${c[4]};opacity:.85"></span><small>Psicologia</small><p>Cuidar da mente também é rotina.</p></div></div>
+      <div class="mocks">${mockup(c[0], c[1], c[3], c[4])}</div>
       <p class="por">${esc(p.por)}</p>${rate('pal:' + p.id)}${coment('pal:' + p.id)}</article>`; }).join('')}</div>`,
   fontes: () => {
     const nm = nomeAtual(); const desc = (V('descritor') || [])[0] || V('descritor__outro') || 'Clínica de Psicologia';
     return `<div class="nomebox"><label for="nomevivo">Nome</label><input id="nomevivo" type="text" data-f="nome" value="${esc(nm)}" placeholder="Digite o nome da clínica"></div>
     <div class="fnts">${FONTES.map(f => { const v = st.r['fnt:' + f.id]?.v; return `<article class="fnt ${v || ''}" data-card="fnt:${f.id}"><span class="tag">${esc(f.nome)}</span>
-      <div class="spec"><div class="big" data-nomevivo style="font-family:${f.tit};font-weight:${f.tw};${f.var ? `font-variation-settings:${f.var}` : ''}">${esc(nm || 'Clareira')}</div><div class="desc" style="font-family:${f.txt}">${esc(desc)}</div>${f.mao ? `<div class="mao" style="font-family:${f.mao}">um lugar para respirar</div>` : ''}<p class="corpo" style="font-family:${f.txt}">Atendimento para crianças, adultos, casais e famílias, com uma equipe que conversa entre si.</p></div>
+      <div class="spec"><div class="big" data-nomevivo style="font-family:${f.tit};font-weight:${f.tw};${f.var ? `font-variation-settings:${f.var}` : ''}">${esc(nm || 'Clareira')}</div><div class="desc" style="font-family:${f.txt}">${esc(desc)}</div>${f.mao ? `<div class="mao" style="font-family:${f.mao}">um lugar para respirar</div>` : ''}<p class="corpo" style="font-family:${f.txt}">Psicoterapia para adultos, casais e famílias, com escuta sem pressa.</p></div>
       <p class="meta">${esc(f.clima)}<br><b>${esc(f.pares)}</b></p>${rate('fnt:' + f.id)}${coment('fnt:' + f.id)}</article>`; }).join('')}</div>`;
   },
-  estilos: b => { const s = V('estilo_fonte'); return campo(b, `<p class="help">A fonte da marca será desenhada do zero. Escolham o ponto de partida.</p><div class="estilos">${ESTILOS_FONTE.map(e => `<button type="button" class="est ${s === e.id ? 'on' : ''}" data-est="${e.id}"><span class="aa" style="font-family:${e.f};font-weight:${e.w};${e.v ? `font-variation-settings:${e.v};` : ''}${e.i ? 'font-style:italic' : ''}">Aa Rr 23</span><b>${esc(e.nome)}</b><small>${esc(e.d)}</small></button>`).join('')}</div>`); },
-  upload: () => `<div class="campo"><span class="lbl">Arquivos</span><p class="help">Fotos do espaço, logo antigo, prints de referência, rascunhos. Imagens ou PDF, até 20 arquivos. Escrevam um comentário em cada um.</p>
-    <label class="drop" id="drop">${ICON.up}<b>Toque para escolher arquivos</b><small>ou arraste para cá</small><input type="file" id="file" multiple accept="image/*,application/pdf"></label>
-    <div class="arqs">${st.arqs.map(a => `<div class="arq"><div class="th" data-th="${a.id}">${/pdf/.test(a.t) ? 'PDF' : ''}</div><div><div class="nm2">${esc(a.n)}</div><div class="sz">${(a.s / 1e6).toFixed(1).replace('.', ',')} MB</div><textarea data-arqc="${a.id}" placeholder="O que é esta imagem? O que gostam nela?">${esc(a.c)}</textarea></div><button type="button" class="x" data-arqx="${a.id}" aria-label="Remover">×</button></div>`).join('')}</div>
-    <div class="ex"><b>Exemplo de comentário</b>Foto da recepção. Gostamos da madeira clara e da luz natural, queremos que a marca combine com ela.</div></div>`,
-  links: () => `<div class="campo"><span class="lbl">Links de referência</span><p class="help">Perfis do Instagram, projetos do Behance, pastas do Pinterest, sites. Digam o que gostam em cada um.</p>
-    ${st.links.map((l, i) => `<div class="linkrow"><input type="url" data-lu="${i}" value="${esc(l.u)}" placeholder="Cole o link aqui" inputmode="url">${st.links.length > 1 ? `<button type="button" class="x" data-lx="${i}" aria-label="Remover">×</button>` : ''}<textarea data-lc="${i}" placeholder="O que vocês gostam aqui?">${esc(l.c)}</textarea></div>`).join('')}
+  estilos: b => { const s = V('estilo_fonte'); return campo(b, `<p class="help">A fonte da marca será desenhada do zero. Escolha o ponto de partida.</p><div class="estilos">${ESTILOS_FONTE.map(e => `<button type="button" class="est ${s === e.id ? 'on' : ''}" data-est="${e.id}"><span class="aa" style="font-family:${e.f};font-weight:${e.w};${e.v ? `font-variation-settings:${e.v};` : ''}${e.i ? 'font-style:italic' : ''}">Aa Rr 23</span><b>${esc(e.nome)}</b><small>${esc(e.d)}</small></button>`).join('')}</div>`); },
+  upload: b => {
+    const lista = st.arqs.filter(a => (a.sec || 'upload') === b.id);
+    const lbl = b.label || 'Arquivos';
+    const help = b.help || 'Fotos do espaço, se já tiver, prints de referência e rascunhos. Imagens ou PDF, até 20 arquivos. Escreva um comentário em cada um.';
+    return `<div class="campo" id="f-${b.id}"><span class="lbl">${esc(lbl)}${b.opc ? ' <span class="opc">Opcional</span>' : ''}</span><p class="help">${esc(help)}</p>
+    <label class="drop ${b.mini ? 'mini' : ''}" data-drop="${b.id}">${ICON.up}<b>Toque para escolher ${b.mini ? 'imagens' : 'arquivos'}</b><small>ou arraste para cá</small><input type="file" data-file="${b.id}" multiple accept="image/*,application/pdf"></label>
+    <div class="arqs">${lista.map(a => `<div class="arq"><div class="th" data-th="${a.id}">${/pdf/.test(a.t) ? 'PDF' : ''}</div><div><div class="nm2">${esc(a.n)}</div><div class="sz">${(a.s / 1e6).toFixed(1).replace('.', ',')} MB</div><textarea data-arqc="${a.id}" placeholder="O que você gosta aqui?">${esc(a.c)}</textarea></div><button type="button" class="x" data-arqx="${a.id}" aria-label="Remover">×</button></div>`).join('')}</div>
+    <div class="ex"><b>Exemplo de comentário</b>${esc(b.exc || 'Foto da sala que vou usar. Gosto da madeira clara e da luz natural, quero que a marca combine com ela.')}</div></div>`;
+  },
+  minhapaleta: b => {
+    const cs = V('minha_paleta') || [];
+    const prev = cs.length >= 2 ? `<div class="mpprev">${mockup(...papeis(cs))}</div>` : `<p class="help" style="margin-top:14px">Com 2 cores ou mais, ela aparece aplicada aqui.</p>`;
+    const sug = ['#F4F0E6', '#7E9077', '#34423A', '#B9684B', '#3E6D8B', '#8B7EA8', '#E1B679', '#1F4C44', '#D99B6D', '#2A2623'];
+    return campo(b, `<div class="mp">${cs.map((c, i) => `<div class="cor"><label style="background:${c}" aria-label="Trocar cor ${i + 1}"><input type="color" value="${c}" data-mpc="${i}"></label><small>${c.toUpperCase()}</small><button type="button" class="x" data-mpx="${i}" aria-label="Tirar cor">×</button></div>`).join('')}${cs.length < 6 ? `<button type="button" class="mais" data-mpadd aria-label="Adicionar cor">+</button>` : ''}</div>
+      ${cs.length < 6 ? `<p class="help" style="margin:14px 0 0">Ou toque num tom para começar:</p><div class="sug-cores">${sug.map(c => `<button type="button" style="background:${c}" data-mpsug="${c}" aria-label="${c}"></button>`).join('')}</div>` : ''}
+      ${prev}
+      <label for="i-mp_c" style="margin-top:16px;font-size:15px">Por que essas cores?</label><textarea id="i-mp_c" data-f="mp_c" placeholder="Escreva aqui">${esc(V('mp_c'))}</textarea>`);
+  },
+  links: () => `<div class="campo"><span class="lbl">Links de referência</span><p class="help">Perfis do Instagram, projetos do Behance, pastas do Pinterest, sites. Diga o que gosta em cada um.</p>
+    ${st.links.map((l, i) => `<div class="linkrow"><input type="url" data-lu="${i}" value="${esc(l.u)}" placeholder="Cole o link aqui" inputmode="url">${st.links.length > 1 ? `<button type="button" class="x" data-lx="${i}" aria-label="Remover">×</button>` : ''}<textarea data-lc="${i}" placeholder="O que você gosta aqui?">${esc(l.c)}</textarea></div>`).join('')}
     <button type="button" class="add" data-ladd>+ Adicionar outro link</button>
     <div class="ex"><b>Exemplo</b>instagram.com/estudio-exemplo · Gosto das cores terrosas e das fotos com luz natural.</div></div>`,
 };
+function lum(h) { const n = parseInt(h.slice(1), 16); const [r, g, b] = [n >> 16 & 255, n >> 8 & 255, n & 255].map(v => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }); return .2126 * r + .7152 * g + .0722 * b; }
+function papeis(cs) { const o = [...cs].sort((a, b) => lum(b) - lum(a)); const bg = o[0], ink = o[o.length - 1]; const meio = o.slice(1, -1); return [bg, meio[0] || ink, ink, meio[1] || meio[0] || ink]; }
+function mockup(bg, main, ink, acc) {
+  const nm = nomeAtual() || 'Sua clínica';
+  return `<div class="mcard" style="background:${bg};color:${ink}"><div class="mk"><i style="background:${main}"></i><b data-nomevivo>${esc(nm)}</b></div><small style="color:${ink};opacity:.75">Psicologia<br>Presencial e online</small></div>
+      <div class="mpost" style="background:${main};color:${bg}"><span class="bola" style="background:${acc};opacity:.85"></span><small>Psicologia</small><p>Cuidar da mente também é rotina.</p></div>`;
+}
 function card(r) {
   const k = 'ref:' + r.id; const v = st.r[k]?.v;
   return `<article class="ref ${v || ''}" data-card="${esc(k)}"><div class="im" data-zoom="img/${esc(r.file)}" data-cap="${esc(r.title)}${r.author ? ' · ' + esc(r.author) : ''}"><img loading="lazy" src="img/${esc(r.file)}" alt="${esc(r.title)}">${v === 'amei' ? '<span class="badge">Amei</span>' : ''}</div>
@@ -181,16 +201,18 @@ function stepHTML(i) {
   if (s.id === 'inicio') return abertura();
   if (s.id === 'envio') return envio();
   let blocos = s.blocks.map(b => R[b.type](b)).join('');
+  const largo = ['logo', 'cores', 'fontes', 'clima', 'simbolos', 'personalidade'].includes(s.id);
   if (s.id === 'personalidade') blocos = `<div class="pers">${blocos}</div>`;
-  return `<section class="etapa"><p class="kick">Etapa ${s.num} de 12</p><h2>${esc(s.titulo[0])}<em>${esc(s.titulo[1])}</em></h2>${s.lead ? `<p class="lead">${esc(s.lead)}</p>` : ''}<div class="blocos">${blocos}</div></section>`;
+  const total = STEPS.filter(x => x.blocks).length;
+  return `<section class="etapa ${largo ? 'larga' : 'estreita'}"><p class="kick">Etapa ${+s.num} de ${total}<span class="min">· cerca de ${s.min} min</span></p><h2>${esc(s.titulo[0])}<em>${esc(s.titulo[1])}</em></h2>${s.lead ? `<p class="lead">${esc(s.lead)}</p>` : ''}<div class="blocos ${largo ? '' : 'numerar'}">${blocos}</div></section>`;
 }
 function abertura() {
-  return `<section class="etapa"><p class="kick">Questionário de marca · Vinicius · Clínica de psicologia</p><h1>Vamos construir<em>a marca da clínica</em></h1>
-  <p class="lead">Vinicius, este é o primeiro passo da identidade visual. Aqui estão as perguntas que preciso responder antes de desenhar, e também referências, cores e letras para vocês reagirem. Se der, respondam junto com a equipe.</p>
-  <div class="como"><div><span>01</span><b>Respondam com calma</b><p>Leva uns 30 minutos. Cada pergunta tem um exemplo de resposta para orientar.</p></div><div><span>02</span><b>Reajam às referências</b><p>Toquem em Amei, Talvez ou Não e comentem o que quiserem.</p></div><div><span>03</span><b>Mandem o que já têm</b><p>Fotos do espaço, logo antigo, prints e links, tudo por aqui.</p></div><div><span>04</span><b>Podem parar e voltar</b><p>Tudo fica salvo neste aparelho. No fim, é só enviar.</p></div></div>
+  return `<section class="etapa estreita abre"><p class="kick">Questionário de marca · Vinicius · Clínica de psicologia</p><h1>Vamos construir<em>a marca da clínica</em></h1>
+  <p class="lead">Vinicius, este é o primeiro passo da identidade visual da sua clínica. Aqui estão as perguntas que preciso responder antes de desenhar, junto com referências, cores e letras para você reagir.</p>
+  <div class="como"><div><span>01</span><b>Responda com calma</b><p>Leva uns 35 minutos. Cada pergunta tem um exemplo de resposta para orientar.</p></div><div><span>02</span><b>Reaja às referências</b><p>Marque Amei, Talvez ou Não e comente o que quiser.</p></div><div><span>03</span><b>Mande o que já tem</b><p>Fotos do espaço, prints e links, tudo por aqui mesmo.</p></div><div><span>04</span><b>Pode parar e voltar</b><p>Tudo fica salvo neste aparelho. No fim, é só enviar.</p></div></div>
   <div class="sec">Como o projeto segue</div>
   <div class="linha">${['Questionário', 'Moodboard e paleta', 'Logo', 'Fonte própria', 'Manual de marca', 'Aplicações'].map((x, i) => `<span class="${i ? '' : 'at'}"><i>${i + 1}</i>${x}</span>`).join('')}</div>
-  <p class="nota">O prazo de até 10 dias úteis começa a contar quando o questionário chega para mim. Qualquer dúvida no caminho, me chamem no WhatsApp ${esc(CONFIG.whatsapp)}.</p>
+  <p class="nota">O prazo de até 10 dias úteis começa a contar quando o questionário chega para mim. Qualquer dúvida no caminho, me chame no WhatsApp ${esc(CONFIG.whatsapp)}.</p>
   ${assin()}</section>`;
 }
 const assin = () => `<footer class="assin"><span><b>Matheus Saboia</b> · Designer, criativos e identidade · Rama</span><span>WhatsApp ${esc(CONFIG.whatsapp)}</span></footer>`;
@@ -210,7 +232,8 @@ function cont(s) {
     else if (b.type === 'paletas') { tot += PALETAS.length; ok += PALETAS.filter(x => st.r['pal:' + x.id]?.v).length; }
     else if (b.type === 'fontes') { tot += FONTES.length; ok += FONTES.filter(x => st.r['fnt:' + x.id]?.v).length; }
     else if (b.type === 'combo') { if ((V('combo') || []).length >= 2 || has('combo_c')) { tot++; ok++; } }
-    else if (b.type === 'upload') { tot++; if (st.arqs.length) ok++; }
+    else if (b.type === 'upload') { const n = st.arqs.filter(a => (a.sec || 'upload') === b.id).length; if (!b.opc) tot++; if (n) { if (b.opc) tot++; ok++; } }
+    else if (b.type === 'minhapaleta') { if ((V('minha_paleta') || []).length) { tot++; ok++; } }
     else if (b.type === 'links') { tot++; if (st.links.some(l => l.u.trim())) ok++; }
   }
   return { tot, ok };
@@ -219,12 +242,12 @@ function envio() {
   const linhas = STEPS.filter(s => s.blocks).map(s => { const c = cont(s); const i = STEPS.indexOf(s); const pouco = c.ok < Math.ceil(c.tot / 2);
     return `<div class="rv ${pouco ? 'falta' : ''}"><span>${s.num}</span><div><b>${esc(s.t)}</b><small>${c.ok} de ${c.tot} respondidas${pouco ? ' · vale completar' : ''}</small></div><button type="button" data-go="${i}">Ver</button></div>`; }).join('');
   const ja = st.enviado.length;
-  return `<section class="etapa"><p class="kick">Etapa 12 de 12</p><h2>Revisar<em>e enviar</em></h2><p class="lead">Confiram o que ficou faltando. Nada é obrigatório, mas quanto mais completo, mais certeira fica a primeira proposta.</p>
+  return `<section class="etapa estreita"><p class="kick">Último passo</p><h2>Revisar<em>e enviar</em></h2><p class="lead">Confira o que ficou faltando. Nada é obrigatório, mas quanto mais completo, mais certeira fica a primeira proposta.</p>
   <div class="rev">${linhas}</div>
-  ${ja ? `<div class="ok-env"><h3>Recebido, obrigado!</h3><p>Enviado em ${esc(st.enviado[ja - 1])}. Se mudarem alguma resposta, é só enviar de novo aqui embaixo.</p><ol><li>Leio tudo e monto o resumo do que entendi.</li><li>Mando o moodboard com a direção visual e a paleta.</li><li>Com a direção aprovada, começo o logo.</li></ol></div>` : ''}
+  ${ja ? `<div class="ok-env"><h3>Recebido, obrigado!</h3><p>Enviado em ${esc(st.enviado[ja - 1])}. Se mudar alguma resposta, é só enviar de novo aqui embaixo.</p><ol><li>Leio tudo e monto o resumo do que entendi.</li><li>Mando o moodboard com a direção visual e a paleta.</li><li>Com a direção aprovada, começo o logo.</li></ol></div>` : ''}
   <div class="envbox"><h3>${ja ? 'Enviar de novo' : 'Tudo pronto?'}</h3><p>As respostas, os comentários e os arquivos chegam direto para mim.</p>
-    <input type="text" data-f="quem" value="${esc(V('quem'))}" placeholder="Quem respondeu (nomes)">
-    <input type="text" data-f="zap" value="${esc(V('zap'))}" placeholder="WhatsApp para contato" inputmode="tel">
+    <input type="text" data-f="quem" value="${esc(V('quem'))}" placeholder="Seu nome">
+    <input type="text" data-f="zap" value="${esc(V('zap'))}" placeholder="Seu WhatsApp" inputmode="tel">
     <button type="button" class="btn" id="enviar">${ja ? 'Enviar atualização' : 'Enviar questionário'} ${ICON.seta}</button>
     <p class="st" id="st"></p><button type="button" class="copiar" id="copiar">Copiar resumo em texto</button></div>
   ${assin()}</section>`;
@@ -234,12 +257,17 @@ function envio() {
 const idxFromHash = () => { const i = STEPS.findIndex(s => '#' + s.id === location.hash); return i < 0 ? 0 : i; };
 let cur = location.hash ? idxFromHash() : Math.min(st.step || 0, STEPS.length - 1);
 function passos() {
-  $('#passos').innerHTML = STEPS.map((s, i) => { const c = cont(s); const ok = c && c.ok > 0; return `<button type="button" data-go="${i}" class="${i === cur ? 'at' : ''} ${ok ? 'ok' : ''}">${s.num ? `<span>${s.num}</span>` : ''}${esc(s.t)}</button>`; }).join('');
+  const box = $('#passos');
+  box.innerHTML = STEPS.map((s, i) => `<button type="button" data-go="${i}" class="${i === cur ? 'at' : ''}">${s.num ? `<span>${s.num}</span>` : ''}${esc(s.t)}</button>`).join('');
   $('#trilho').style.width = (cur / (STEPS.length - 1) * 100) + '%';
-  const a = $('#passos .at'); if (a) a.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+  marcaPassos();
+  const a = $('.at', box); if (a) box.scrollLeft = a.offsetLeft - (box.clientWidth - a.offsetWidth) / 2;
 }
+/* só troca as marcas de "respondida", sem redesenhar nem rolar nada */
+function marcaPassos() { $$('#passos button').forEach((b, i) => { const c = cont(STEPS[i]); b.classList.toggle('ok', !!(c && c.ok > 0)); }); }
 function navBar() {
   const p = STEPS[cur + 1];
+  setTimeout(() => semOrfas($('#nav')));
   $('#nav').innerHTML = cur === 0
     ? `<button type="button" class="btn prox" data-go="1">Começar ${ICON.seta}</button>`
     : `<button type="button" class="btn sec2" data-go="${cur - 1}" aria-label="Voltar">${ICON.volta}<span class="vt">Voltar</span></button>${p ? `<button type="button" class="btn prox" data-go="${cur + 1}">${p.id === 'envio' ? 'Revisar e enviar' : 'Próxima: ' + esc(p.t)} ${ICON.seta}</button>` : ''}`;
@@ -252,14 +280,29 @@ function go(i, top = true) {
   $('#app').innerHTML = stepHTML(cur); pos(); navBar(); passos();
   if (top) window.scrollTo({ top: 0, behavior: 'instant' });
 }
-function rerender() { const y = scrollY; $('#app').innerHTML = stepHTML(cur); pos(); passos(); window.scrollTo({ top: y, behavior: 'instant' }); }
+function rerender() { const y = scrollY; const cx = {}; $$('[data-car]').forEach((c, i) => cx[i] = c.scrollLeft); $('#app').innerHTML = stepHTML(cur); pos(); marcaPassos(); $$('[data-car]').forEach((c, i) => { if (cx[i]) c.scrollLeft = cx[i]; }); window.scrollTo({ top: y, behavior: 'instant' }); }
 function pos() {
+  semOrfas($('#app')); semOrfas($('#nav'));
+  $$('[data-car]').forEach(c => { const atual = () => { const w = c.firstElementChild?.offsetWidth || 1; const i = Math.round(c.scrollLeft / (w + 12)); const el = c.parentElement.querySelector('[data-carpos]'); if (el) el.textContent = `${Math.min(i + 1, c.children.length)} de ${c.children.length}`; }; c.addEventListener('scroll', () => { cancelAnimationFrame(c._r); c._r = requestAnimationFrame(atual); }, { passive: true }); atual(); });
   $$('[data-th]').forEach(async el => { const id = el.dataset.th; let b = blobs[id]; if (!b) { try { b = await idb.get(id); if (b) blobs[id] = b; } catch {} } if (b && /^image/.test(b.type)) el.style.backgroundImage = `url(${URL.createObjectURL(b)})`; });
-  const d = $('#drop'); if (d) {
+  $$('[data-drop]').forEach(d => { const sec = d.dataset.drop;
     ['dragenter', 'dragover'].forEach(e => d.addEventListener(e, ev => { ev.preventDefault(); d.classList.add('over'); }));
     ['dragleave', 'drop'].forEach(e => d.addEventListener(e, ev => { ev.preventDefault(); d.classList.remove('over'); }));
-    d.addEventListener('drop', ev => addArquivos([...ev.dataTransfer.files]));
-    $('#file').addEventListener('change', ev => { addArquivos([...ev.target.files]); ev.target.value = ''; });
+    d.addEventListener('drop', ev => addArquivos([...ev.dataTransfer.files], sec));
+    $('input[type=file]', d).addEventListener('change', ev => { addArquivos([...ev.target.files], sec); ev.target.value = ''; });
+  });
+}
+/* evita palavra sozinha no fim da linha: prende palavras curtas à seguinte e as duas últimas de cada frase */
+const CURTAS = /(^|[\s(])(a|o|e|é|à|ao|as|os|de|da|do|das|dos|em|no|na|nos|nas|um|uma|ou|se|que|com|por|para|sem|seu|sua|só|não|já|mais|tem|vai|cada)\s+(?=\S)/gi;
+function semOrfas(root) {
+  if (!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => n.parentElement.closest('textarea,input,script,style,svg,.chip,.tabs,.passos') ? 2 : 1 });
+  const ns = []; while (w.nextNode()) ns.push(w.currentNode);
+  for (const n of ns) {
+    let t = n.nodeValue; if (!/\s\S+\s+\S/.test(t)) continue;
+    t = t.replace(CURTAS, (m, a, b) => a + b + '\u00A0').replace(CURTAS, (m, a, b) => a + b + '\u00A0');
+    t = t.replace(/\s+(\S{1,14}[.,:;!?…)]*\s*)$/, '\u00A0$1');
+    if (t !== n.nodeValue) n.nodeValue = t;
   }
 }
 function carregaFontes() { const l = $('#fx'); if (l && !l.href) l.href = l.dataset.href; }
@@ -293,6 +336,9 @@ document.addEventListener('click', e => {
   if (d.tipo) { let a = V('tipos') || []; if (a.includes(d.tipo)) a = a.filter(x => x !== d.tipo); else if (a.length >= 3) { toast('Escolha até 3.'); return; } else a = [...a, d.tipo]; st.v.tipos = a; save(); t.classList.toggle('on'); return; }
   if (d.tab) { const g = t.closest('[data-gal]').dataset.gal; st.tab[g] = d.tab; save(); rerender(); $('.tabs')?.scrollIntoView({ block: 'start', behavior: 'smooth' }); return; }
   if (d.tabnext) { const b = STEPS[cur].blocks.find(x => x.id === d.tabnext); const cats = b.cats.filter(c => REFS.some(r => r.cat === c)); const at = cats.includes(st.tab[b.id]) ? st.tab[b.id] : cats[0]; st.tab[b.id] = cats[cats.indexOf(at) + 1]; save(); rerender(); const tb = $('.tabs'); if (tb) window.scrollTo({ top: tb.getBoundingClientRect().top + scrollY - 130, behavior: 'smooth' }); return; }
+  if (d.mpadd != null || d.mpsug) { const cs = V('minha_paleta') || []; if (cs.length >= 6) return; cs.push(d.mpsug || '#7E9077'); st.v.minha_paleta = cs; save(); rerender(); if (d.mpadd != null) $$('[data-mpc]').pop()?.click(); return; }
+  if (d.mpx != null) { const cs = V('minha_paleta') || []; cs.splice(+d.mpx, 1); st.v.minha_paleta = cs; save(); rerender(); return; }
+  if (d.carmove) { const c = t.closest('.carwrap').querySelector('[data-car]'); const w = c.firstElementChild.offsetWidth + 12; c.scrollBy({ left: +d.carmove * w, behavior: 'smooth' }); return; }
   if (d.comboabrir != null) { st.comboAberto = true; save(); rerender(); return; }
   if (d.comb) { let a = V('combo') || []; if (a.includes(d.comb)) a = a.filter(x => x !== d.comb); else if (a.length >= 3) { toast('Até 3 símbolos por combinação.'); return; } else a = [...a, d.comb]; st.v.combo = a; save(); rerender(); return; }
   if (d.cex != null) { st.v.combo = [...COMBOS[+d.cex].s]; save(); rerender(); $('.cprev')?.scrollIntoView({ block: 'center', behavior: 'smooth' }); return; }
@@ -304,18 +350,29 @@ document.addEventListener('click', e => {
   if (t.id === 'enviar') return enviar();
   if (t.id === 'copiar') { navigator.clipboard?.writeText(resumo()).then(() => toast('Resumo copiado.'), () => toast('Não deu para copiar neste aparelho.')); return; }
 });
+const DIGITA = 'input[type=text],input[type=url],input:not([type]),textarea';
+let tFoco;
+function garanteVisivel(el) {
+  const vv = window.visualViewport; const alt = vv ? vv.height : innerHeight;
+  const r = el.getBoundingClientRect(); const topo = 76;
+  if (r.top < topo || r.bottom > alt - 20) window.scrollBy({ top: r.top - Math.max(topo, (alt - r.height) / 3), behavior: 'smooth' });
+}
+document.addEventListener('focusin', e => { if (!e.target.matches(DIGITA)) return; clearTimeout(tFoco); document.body.classList.add('digitando'); setTimeout(() => garanteVisivel(e.target), 350); });
+document.addEventListener('focusout', e => { if (!e.target.matches(DIGITA)) return; tFoco = setTimeout(() => document.body.classList.remove('digitando'), 200); });
+window.visualViewport?.addEventListener('resize', () => { const a = document.activeElement; if (a && a.matches && a.matches(DIGITA)) garanteVisivel(a); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') $('.lbox')?.remove(); });
 document.addEventListener('input', e => {
   const t = e.target; const d = t.dataset;
   if (d.f) { st.v[d.f] = t.value; save(); if (d.f === 'nome') $$('[data-nomevivo]').forEach(x => x.textContent = t.value.trim() || (x.classList.contains('big') ? 'Clareira' : 'Sua clínica')); return; }
   if (d.sl) { const v = +t.value; st.v[d.sl] = v; t.style.setProperty('--p', v + '%'); const b = STEPS[cur].blocks.find(x => x.id === d.sl); const w = t.closest('.sl'); w.classList.remove('vazio'); $('.sl-val', w).textContent = slVal(b, v); save(); return; }
+  if (d.mpc != null) { const cs = V('minha_paleta') || []; cs[+d.mpc] = t.value; st.v.minha_paleta = cs; save(); const box = t.closest('.cor'); box.querySelector('label').style.background = t.value; box.querySelector('small').textContent = t.value.toUpperCase(); return; }
   if (d.cmt) { const r = st.r[d.cmt] ||= {}; r.c = t.value; t.parentElement.classList.toggle('tem', !!t.value.trim()); save(); return; }
   if (d.arqc) { const a = st.arqs.find(x => x.id === d.arqc); if (a) { a.c = t.value; save(); } return; }
   if (d.lu != null) { st.links[+d.lu].u = t.value; save(); return; }
   if (d.lc != null) { st.links[+d.lc].c = t.value; save(); return; }
 });
 /* slider sem arrastar: um toque já marca */
-document.addEventListener('change', e => { const d = e.target.dataset; if (d.sl && V(d.sl) == null) { st.v[d.sl] = +e.target.value; save(); } });
+document.addEventListener('change', e => { const d = e.target.dataset; if (d.mpc != null) { rerender(); return; } if (d.sl && V(d.sl) == null) { st.v[d.sl] = +e.target.value; save(); } });
 window.addEventListener('hashchange', () => { const i = idxFromHash(); if (i !== cur) go(i); });
 
 /* ---------- resumo e envio ---------- */
@@ -359,7 +416,9 @@ function resumo() {
       } else if (b.type === 'estilos') {
         const e = ESTILOS_FONTE.find(x => x.id === V('estilo_fonte')); if (e) L.push(`- Estilo da fonte própria: ${e.nome}`);
       } else if (b.type === 'upload') {
-        if (st.arqs.length) { L.push(`- Arquivos enviados (${st.arqs.length}):`); st.arqs.forEach(a => L.push(`  ${a.n}${a.c ? ': ' + a.c.trim() : ''}`)); }
+        const ls = st.arqs.filter(a => (a.sec || 'upload') === b.id); if (ls.length) { L.push(`- ${b.label || 'Arquivos'} (${ls.length}):`); ls.forEach(a => L.push(`  ${a.n}${a.c ? ': ' + a.c.trim() : ''}`)); }
+      } else if (b.type === 'minhapaleta') {
+        const cs = V('minha_paleta') || []; if (cs.length) L.push(`- Paleta própria: ${cs.map(c => c.toUpperCase()).join(', ')}${V('mp_c') ? ' · ' + fmt(V('mp_c')) : ''}`);
       } else if (b.type === 'links') {
         const ls = st.links.filter(l => l.u.trim()); if (ls.length) { L.push('- Links:'); ls.forEach(l => L.push(`  ${l.u.trim()}${l.c ? ' · ' + l.c.trim() : ''}`)); }
       }

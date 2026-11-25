@@ -1,0 +1,68 @@
+/* ===== revisão de layout (25/11) ===== */
+p,small,label,.lbl,.help,.ex,.lead,figcaption,.por,.cl,.meta,.nota,li{text-wrap:pretty}
+h1,h2,h3,.campo>label,.campo .lbl,.tipo b,.est b,.cex b,.simb b,.como b{text-wrap:balance}
+.etapa.estreita{max-width:720px;margin-inline:auto}
+.etapa.abre{max-width:860px}
+.kick .min{color:var(--mut2);font-weight:600;letter-spacing:.12em;margin-left:8px}
+h2{margin-bottom:14px}
+.blocos{gap:18px;margin-top:28px;grid-template-columns:minmax(0,1fr)}
+.campo{border-radius:18px;padding:24px 22px 22px;box-shadow:0 1px 0 rgba(120,95,40,.06),0 10px 26px -18px rgba(120,95,40,.35)}
+.campo>label,.campo .lbl{font-size:18px;letter-spacing:-.005em;margin-bottom:6px}
+.help{font-size:14.5px;line-height:1.5}
+
+/* número de cada pergunta */
+.blocos.numerar{counter-reset:q}
+.blocos.numerar>.campo{counter-increment:q}
+.blocos.numerar>.campo>label:first-child::before,.blocos.numerar>.campo>.lbl:first-child::before{content:"Pergunta " counter(q);display:block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:6px}
+
+/* exemplo mais leve */
+.ex{background:transparent;border-left:2px solid #cfe2da;border-radius:0;padding:4px 0 4px 14px;margin-top:14px;color:var(--mut);font-size:14px;font-style:italic}
+.ex b{font-style:normal;font-size:10px;letter-spacing:.2em;margin-bottom:2px}
+
+/* campos de texto sempre com 16px: abaixo disso o iPhone dá zoom e a tela pula */
+.coment textarea,.arq textarea,.linkrow input,.linkrow textarea,.campo input,.campo textarea{font-size:16px}
+
+/* enquanto digita no celular: some a barra de baixo e a fileira de etapas */
+.nav{transition:transform .2s,opacity .2s}
+body.digitando .nav{transform:translateY(110%);opacity:0;pointer-events:none}
+body.digitando .passos{display:none}
+body.digitando .tabs,body.digitando .nomebox{top:62px}
+.campo input,.campo textarea{scroll-margin:96px 0 40px}
+
+/* carrossel de referências no celular */
+.carnav{display:none}
+.ref .rate{grid-template-columns:1.3fr 1fr 1fr}
+@media(max-width:559px){
+  .grid.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding:2px 20px 6px;scroll-padding-inline:20px;scrollbar-width:none;overscroll-behavior-x:contain}
+  .grid.car::-webkit-scrollbar{display:none}
+  .grid.car>.ref{flex:0 0 86%;scroll-snap-align:start}
+  .grid.car .ref .im{aspect-ratio:4/3}
+  .carnav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px}
+  .carnav .seta{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+  .carnav .seta svg{width:18px;height:18px}
+  .carpos{font-size:14px;font-weight:700;min-width:64px;text-align:center}
+}
+
+/* montar a própria paleta */
+.mp{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.mp .cor{position:relative;width:76px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.mp .cor label{display:block;width:76px;height:76px;border-radius:14px;border:1px solid rgba(0,0,0,.1);cursor:pointer;box-shadow:inset 0 0 0 3px rgba(255,255,255,.5)}
+.mp .cor input[type=color]{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.mp .cor small{font-size:11.5px;color:var(--mut);font-family:ui-monospace,Consolas,monospace}
+.mp .cor .x{position:absolute;top:-8px;right:-8px;width:24px;height:24px;border-radius:50%;background:#fff;border:1px solid var(--line);font-size:14px;line-height:1;color:var(--mut)}
+.mp .mais{width:76px;height:76px;border-radius:14px;border:2px dashed #d6c6a6;color:var(--g);font-size:28px;font-weight:300;background:var(--soft)}
+.mpprev{display:grid;grid-template-columns:1.25fr 1fr;gap:10px;margin-top:16px;max-width:460px}
+.sug-cores{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.sug-cores button{width:30px;height:30px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+
+/* envio de imagens por etapa */
+.drop.mini{padding:20px 16px}
+.drop.mini svg{width:30px;height:30px}
+
+@media(max-width:520px){
+  .campo{padding:20px 16px 18px;border-radius:16px}
+  .tabs,.nomebox{top:104px}
+  h2{font-size:clamp(44px,13vw,60px)}
+  .mp .cor,.mp .cor label,.mp .mais{width:64px}
+  .mp .cor label,.mp .mais{height:64px}
+}

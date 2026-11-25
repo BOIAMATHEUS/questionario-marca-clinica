@@ -60,123 +60,119 @@ const SIMBOLOS = [
 const COMBOS = [
   { s: ['psi', 'folha'], d: 'A letra da psicologia que vira planta: ciência que cresce.' },
   { s: ['cabeca', 'folha'], d: 'A mente que floresce.' },
-  { s: ['elo', 'folha'], d: 'Uma equipe unida que faz o paciente crescer.' },
+  { s: ['elo', 'folha'], d: 'O vínculo que faz crescer.' },
   { s: ['casa', 'coracao'], d: 'Um lugar seguro, com afeto.' },
   { s: ['porta', 'sol'], d: 'Abrir a porta para um novo começo.' },
   { s: ['onda', 'espiral'], d: 'Movimento e calma ao mesmo tempo.' },
 ];
 
-const PALAVRAS = ['Acolhimento', 'Escuta', 'Ciência', 'Leveza', 'Coragem', 'Cuidado', 'Confiança', 'Clareza', 'Profundidade', 'Movimento', 'Pertencimento', 'Transformação', 'Segurança', 'Autonomia', 'Presença', 'Ética', 'Afeto', 'Equilíbrio', 'Recomeço', 'Colaboração', 'Humanidade', 'Calma'];
+const PALAVRAS = ['Acolhimento', 'Escuta', 'Ciência', 'Leveza', 'Coragem', 'Cuidado', 'Confiança', 'Clareza', 'Profundidade', 'Movimento', 'Pertencimento', 'Transformação', 'Segurança', 'Autonomia', 'Presença', 'Ética', 'Afeto', 'Equilíbrio', 'Recomeço', 'Vínculo', 'Humanidade', 'Calma'];
 
 const NOMES_DIRECOES = [
   { id: 'conceito', nome: 'Uma ideia', ex: 'Travessia, Abrigo, Raiz, Elo, Clareira', d: 'Uma palavra que resume o que a clínica faz pelas pessoas.' },
   { id: 'natureza', nome: 'Natureza', ex: 'Ipê, Maré, Bambu, Sálvia, Aurora', d: 'Uma imagem da natureza que carrega um significado.' },
-  { id: 'classico', nome: 'Grego ou latim', ex: 'Psyché, Ethos, Anima, Kairós, Logos', d: 'Palavras de origem antiga ligadas à mente e ao tempo.' },
-  { id: 'lugar', nome: 'O lugar', ex: 'Casa Cambuí, Clínica Taquaral, Ateliê da Rua 7', d: 'O bairro, a rua ou a casa onde a clínica fica.' },
-  { id: 'fundadores', nome: 'Os fundadores', ex: 'Clínica Moraes Lima, Instituto Prado Leme', d: 'O nome de quem fundou, como em escritórios e consultórios.' },
-  { id: 'sigla', nome: 'Sigla ou nome curto', ex: 'CPI, Núcleo M, Espaço 3', d: 'Curto, fácil de lembrar, abre espaço para crescer.' },
+  { id: 'classico', nome: 'Grego ou latim', ex: 'Psyché, Ethos, Anima, Kairós, Logos', d: 'Palavras antigas ligadas à mente e ao tempo.' },
+  { id: 'lugar', nome: 'O lugar', ex: 'Casa da Ponte, Espaço Centro, Ateliê da Rua 7', d: 'O bairro, a rua ou a casa onde a clínica fica.' },
+  { id: 'fundador', nome: 'O seu nome', ex: 'Clínica Vinicius Prado, Espaço Prado', d: 'Seu sobrenome, como em escritórios e consultórios.' },
+  { id: 'sigla', nome: 'Sigla ou nome curto', ex: 'CPV, Núcleo M, Espaço 3', d: 'Curto, fácil de lembrar e de escrever.' },
 ];
 
 const STEPS = [
-  { id: 'inicio', t: 'Começo', titulo: ['Vamos construir', 'a marca da clínica'] },
+  { id: 'inicio', t: 'Começo' },
 
-  { id: 'clinica', t: 'A clínica', num: '01', titulo: ['A clínica', 'e o nome'], lead: 'Comece pelo básico: como a clínica se chama, onde fica e por que ela existe.',
+  { id: 'clinica', t: 'A clínica', num: '01', min: 5, titulo: ['A clínica', 'e o nome'], lead: 'Comece pelo básico: como a clínica vai se chamar, onde vai ficar e por que ela vai existir.',
     blocks: [
       { type: 'nome' },
-      { id: 'nome_sentido', type: 'textarea', label: 'O que esse nome significa para vocês?', help: 'Se ainda não há nome, conte o que gostariam que ele transmitisse.', ex: 'Clareira é o espaço aberto no meio da mata, onde a luz entra. Queremos ser esse respiro no meio da correria.' },
-      { id: 'descritor', type: 'chips', label: 'Como a clínica se apresenta embaixo do nome?', help: 'Escolha uma ou escreva a de vocês.', options: ['Clínica de Psicologia', 'Psicologia e Saúde Mental', 'Centro de Psicologia', 'Instituto de Psicologia', 'Espaço de Psicoterapia', 'Psicologia Integrada'], outro: true, max: 1 },
-      { id: 'por_que', type: 'textarea', label: 'Por que vocês decidiram abrir a clínica?', help: 'A história real, do jeito que contariam para um amigo.', ex: 'Depois de anos atendendo sozinhos em salas alugadas, quatro colegas da mesma turma decidiram juntar forças para oferecer um cuidado mais completo, com troca de casos entre a equipe.' },
-      { id: 'cidade', type: 'text', label: 'Cidade e bairro', ex: 'Campinas, Cambuí' },
-      { id: 'modalidade', type: 'chips', label: 'Como vão atender?', options: ['Presencial', 'Online', 'Os dois'], max: 1 },
-      { id: 'inauguracao', type: 'text', label: 'Quando a clínica abre (ou abriu)?', ex: 'Março de 2027' },
-      { id: 'instagram', type: 'text', label: '@ do Instagram, se já existir', ex: '@clinicaclareira' },
+      { id: 'nome_sentido', type: 'textarea', label: 'O que esse nome significa para você?', help: 'Se ainda não tem nome, conte o que gostaria que ele transmitisse.', ex: 'Clareira é o espaço aberto no meio da mata, onde a luz entra. Quero que a clínica seja esse respiro no meio da correria.' },
+      { id: 'descritor', type: 'chips', label: 'Como a clínica vai se apresentar embaixo do nome?', help: 'Escolha uma ou escreva a sua.', options: ['Clínica de Psicologia', 'Psicologia e Saúde Mental', 'Centro de Psicologia', 'Espaço de Psicoterapia', 'Consultório de Psicologia', 'Psicologia Clínica'], outro: true, max: 1 },
+      { id: 'por_que', type: 'textarea', label: 'Por que você decidiu abrir a clínica?', help: 'A história real, do jeito que contaria para um amigo.', ex: 'Depois de anos atendendo em salas alugadas, quero um espaço meu, com a minha cara, onde o paciente se sinta em casa desde a recepção.' },
+      { id: 'abordagens', type: 'chips', label: 'Quais abordagens a clínica pretende oferecer?', help: 'Marque todas, inclusive as que você pensa em trazer mais para a frente.', options: ['TCC', 'Psicanálise', 'Humanista / ACP', 'Gestalt', 'Sistêmica', 'Análise do Comportamento', 'ACT', 'Terapia do Esquema', 'EMDR', 'Junguiana'], outro: true },
+      { id: 'servicos', type: 'chips', label: 'Que serviços você pretende ter?', help: 'Marque o que já está nos planos.', options: ['Psicoterapia individual', 'Terapia de casal', 'Terapia familiar', 'Atendimento infantil', 'Avaliação psicológica', 'Orientação de pais', 'Grupos terapêuticos', 'Palestras e empresas'], outro: true },
+      { id: 'endereco', type: 'textarea', label: 'Qual vai ser o endereço da clínica?', help: 'Rua, número e bairro em Itatiba. Se ainda não estiver fechado, conte a região que você está pensando.', ex: 'Rua das Flores, 120, Centro, Itatiba. Casa térrea com jardim na frente.' },
+      { id: 'modalidade', type: 'chips', label: 'Como você vai atender?', options: ['Presencial', 'Online', 'Os dois'], max: 1 },
+      { id: 'inauguracao', type: 'text', label: 'Quando a clínica deve abrir?', ex: 'Março de 2027' },
+      { id: 'instagram', type: 'text', label: '@ do Instagram, se já tiver criado', ex: '@clinicaclareira' },
     ] },
 
-  { id: 'equipe', t: 'A equipe', num: '02', titulo: ['Quem faz', 'a clínica'], lead: 'Uma clínica com equipe precisa de uma marca que seja maior que cada pessoa e acolha todo mundo que entrar depois.',
+  { id: 'publico', t: 'Público', num: '02', min: 4, titulo: ['Para quem', 'é a clínica'], lead: 'A marca precisa falar com quem você quer receber. Quanto mais claro, mais certeira ela fica.',
     blocks: [
-      { id: 'tamanho', type: 'chips', label: 'Quantos profissionais começam com a clínica?', options: ['2 a 3', '4 a 6', '7 a 10', 'Mais de 10'], max: 1 },
-      { id: 'crescer', type: 'chips', label: 'A ideia é crescer a equipe?', options: ['Sim, bastante', 'Aos poucos', 'Não, ficar desse tamanho'], max: 1 },
-      { id: 'areas', type: 'chips', label: 'Quais áreas a clínica vai reunir?', help: 'Marque todas.', options: ['Psicologia clínica', 'Avaliação neuropsicológica', 'Psicopedagogia', 'Psiquiatria parceira', 'Fonoaudiologia', 'Terapia ocupacional', 'Nutrição', 'Supervisão e cursos'], outro: true },
-      { id: 'abordagens', type: 'chips', label: 'Quais abordagens a equipe usa?', options: ['TCC', 'Psicanálise', 'Humanista / ACP', 'Gestalt', 'Sistêmica', 'Análise do Comportamento / ABA', 'ACT', 'DBT', 'Terapia do Esquema', 'EMDR', 'Junguiana', 'Fenomenológica'], outro: true },
-      { id: 'marca_vs_pessoas', type: 'slider', label: 'Quem aparece mais na comunicação?', esq: 'A clínica', esqD: 'A marca vem na frente, os profissionais aparecem como equipe.', dir: 'Os profissionais', dirD: 'Cada psicólogo tem rosto e nome em destaque.' },
-      { id: 'jeito_equipe', type: 'textarea', label: 'Como a equipe trabalha junta? O que isso muda para o paciente?', ex: 'Fazemos reunião de casos toda semana. Se a criança precisa de avaliação e os pais de terapia de casal, tudo acontece aqui, com quem já conversa entre si.' },
-      { id: 'responsavel', type: 'text', label: 'Responsável técnico e CRP', help: 'Esse dado aparece no cartão, no Instagram e nos anúncios, como pede o Código de Ética.', ex: 'Ana Moraes, CRP 06/123456' },
+      { id: 'publicos', type: 'chips', label: 'Quem você pretende atender?', help: 'Marque todos.', options: ['Crianças', 'Adolescentes', 'Adultos', 'Idosos', 'Casais', 'Famílias', 'Gestantes e puérperas', 'Neurodivergentes', 'LGBTQIAPN+', 'Empresas'], outro: true },
+      { id: 'principal', type: 'text', label: 'Se tivesse que escolher um público principal, qual seria?', ex: 'Adultos de 25 a 45 anos, profissionais cansados.' },
+      { id: 'queixas', type: 'textarea', label: 'Com o que você imagina que as pessoas vão chegar?', ex: 'Ansiedade, esgotamento no trabalho, luto, conflitos no relacionamento.' },
+      { id: 'persona', type: 'textarea', label: 'Descreva o paciente que você quer receber', help: 'Idade, rotina, o que sente quando procura ajuda, o que pesa na decisão.', ex: 'Marina, 34 anos, gerente e mãe de um menino de 6. Adia a terapia há dois anos por falta de tempo e medo de ser julgada. Vai escolher pela indicação de uma amiga e porque o Instagram parece leve e sério ao mesmo tempo.' },
+      { id: 'pagamento', type: 'chips', label: 'Como pretende cobrar?', options: ['Particular', 'Convênio', 'Particular e convênio', 'Com valor social também'], max: 1 },
+      { id: 'faixa', type: 'slider', label: 'Como você quer se posicionar em preço em Itatiba?', esq: 'Acessível', esqD: 'Para muita gente, o preço decide.', dir: 'Premium', dirD: 'Atendimento exclusivo, valor mais alto.' },
+      { id: 'canais', type: 'chips', label: 'Por onde você imagina que os pacientes vão chegar?', options: ['Indicação', 'Google', 'Instagram', 'Convênio', 'Médicos e escolas', 'Empresas'], outro: true },
     ] },
 
-  { id: 'publico', t: 'Quem atendem', num: '03', titulo: ['Para quem', 'é a clínica'], lead: 'A marca precisa falar com quem vocês querem receber. Quanto mais claro, mais certeira fica.',
+  { id: 'essencia', t: 'Essência', num: '03', min: 4, titulo: ['O que a clínica', 'vai ser por dentro'], lead: 'Daqui sai o conceito da marca. Responda sem pensar em design, só no que você acredita.',
     blocks: [
-      { id: 'publicos', type: 'chips', label: 'Quem vocês atendem?', help: 'Marque todos.', options: ['Crianças', 'Adolescentes', 'Adultos', 'Idosos', 'Casais', 'Famílias', 'Gestantes e puérperas', 'Neurodivergentes (TEA, TDAH)', 'LGBTQIAPN+', 'Empresas'], outro: true },
-      { id: 'principal', type: 'text', label: 'Se tivesse que escolher um público principal, qual seria?', ex: 'Adultos de 25 a 45 anos, profissionais cansados, e as famílias deles.' },
-      { id: 'queixas', type: 'textarea', label: 'Com o que as pessoas mais chegam?', ex: 'Ansiedade, esgotamento no trabalho, luto, conflitos no casamento, crianças com dificuldade na escola.' },
-      { id: 'persona', type: 'textarea', label: 'Descreva um paciente típico', help: 'Idade, rotina, o que sente quando procura ajuda, o que pesa na decisão.', ex: 'Marina, 34, gerente, mãe de um menino de 6. Adiou a terapia por dois anos por falta de tempo e medo de ser julgada. Escolheu pela indicação de uma amiga e porque o Instagram parecia leve e sério ao mesmo tempo.' },
-      { id: 'pagamento', type: 'chips', label: 'Atendimento', options: ['Particular', 'Convênio', 'Particular e convênio', 'Valor social também'], max: 1 },
-      { id: 'faixa', type: 'slider', label: 'Como vocês se posicionam em preço na cidade?', esq: 'Acessível', esqD: 'Para muita gente, preço é decisivo.', dir: 'Premium', dirD: 'Atendimento exclusivo, valor mais alto.' },
-      { id: 'canais', type: 'chips', label: 'Por onde os pacientes vão chegar?', options: ['Indicação', 'Google', 'Instagram', 'Convênio', 'Médicos e escolas', 'Empresas'], outro: true },
-    ] },
-
-  { id: 'essencia', t: 'Essência', num: '04', titulo: ['O que a clínica', 'é por dentro'], lead: 'Daqui sai o conceito da marca. Respondam sem pensar em design, só no que vocês acreditam.',
-    blocks: [
-      { id: 'frase', type: 'textarea', label: 'Em uma frase: o que a clínica faz pela vida de alguém?', ex: 'Ajuda pessoas cansadas a entenderem o que sentem e a voltarem a escolher a própria vida.' },
+      { id: 'frase', type: 'textarea', label: 'Em uma frase: o que a clínica vai fazer pela vida de alguém?', ex: 'Ajudar pessoas cansadas a entenderem o que sentem e a voltarem a escolher a própria vida.' },
       { id: 'palavras', type: 'chips', label: 'Escolha até 3 palavras que são a cara da clínica', options: PALAVRAS, outro: true, max: 3 },
-      { id: 'sentir', type: 'textarea', label: 'O que a pessoa deve sentir ao entrar na recepção?', ex: 'Alívio. Que pode respirar, que ninguém está com pressa e que está num lugar sério.' },
-      { id: 'diferencial', type: 'textarea', label: 'O que vocês têm que as outras clínicas da cidade não têm?', ex: 'Equipe que se fala de verdade, avaliação e terapia no mesmo lugar e retorno para a família em linguagem simples.' },
-      { id: 'nunca', type: 'chips', label: 'A clínica NUNCA pode parecer...', help: 'Marque o que deve ficar longe.', options: ['Hospital ou laboratório', 'Coach ou autoajuda', 'Infantil demais', 'Fria e distante', 'Mística ou esotérica', 'Luxo inacessível', 'Barata ou improvisada', 'Igual a todas as outras'], outro: true },
+      { id: 'sentir', type: 'textarea', label: 'O que a pessoa deve sentir ao entrar na clínica?', ex: 'Alívio. Que pode respirar, que ninguém está com pressa e que está num lugar sério.' },
+      { id: 'diferencial', type: 'textarea', label: 'O que a sua clínica vai ter que as outras de Itatiba não têm?', ex: 'Escuta sem pressa, horário pontual, retorno claro para a família e um espaço que parece casa, não consultório.' },
+      { id: 'nunca', type: 'chips', label: 'A clínica nunca pode parecer...', help: 'Marque o que deve ficar longe.', options: ['Hospital ou laboratório', 'Coach ou autoajuda', 'Infantil demais', 'Fria e distante', 'Mística ou esotérica', 'Luxo inacessível', 'Barata ou improvisada', 'Igual a todas as outras'], outro: true },
     ] },
 
-  { id: 'personalidade', t: 'Personalidade', num: '05', titulo: ['Se a clínica', 'fosse uma pessoa'], lead: 'Arraste cada barra para o lado que mais combina. O meio vale como equilíbrio entre os dois.',
+  { id: 'personalidade', t: 'Personalidade', num: '04', min: 2, titulo: ['Se a clínica', 'fosse uma pessoa'], lead: 'Arraste cada barra para o lado que mais combina. Ficar no meio também é uma resposta.',
     blocks: [
       { id: 'p_acolhedora', type: 'slider', esq: 'Acolhedora', esqD: 'Abraço, conversa, café.', dir: 'Técnica', dirD: 'Precisão, método, dados.' },
-      { id: 'p_classica', type: 'slider', esq: 'Clássica', esqD: 'Tradição, sobriedade.', dir: 'Contemporânea', dirD: 'Atual, fora do padrão.' },
+      { id: 'p_classica', type: 'slider', esq: 'Clássica', esqD: 'Tradição, sobriedade.', dir: 'Atual', dirD: 'Moderna, fora do padrão.' },
       { id: 'p_leve', type: 'slider', esq: 'Leve', esqD: 'Sorriso, cor, respiro.', dir: 'Séria', dirD: 'Peso, formalidade.' },
       { id: 'p_delicada', type: 'slider', esq: 'Delicada', esqD: 'Traço fino, sutileza.', dir: 'Marcante', dirD: 'Traço forte, presença.' },
       { id: 'p_minimal', type: 'slider', esq: 'Minimalista', esqD: 'Pouco elemento, muito espaço.', dir: 'Detalhada', dirD: 'Textura, ilustração, camadas.' },
       { id: 'p_organica', type: 'slider', esq: 'Orgânica', esqD: 'Curvas, natureza, mão.', dir: 'Geométrica', dirD: 'Retas, grid, precisão.' },
       { id: 'p_quente', type: 'slider', esq: 'Quente', esqD: 'Terra, sol, pele.', dir: 'Fria', dirD: 'Azul, cinza, calma.' },
-      { id: 'p_silenciosa', type: 'slider', esq: 'Silenciosa', esqD: 'Discreta, elegante.', dir: 'Expressiva', dirD: 'Chama atenção no feed.' },
+      { id: 'p_silenciosa', type: 'slider', esq: 'Discreta', esqD: 'Silenciosa, elegante.', dir: 'Expressiva', dirD: 'Chama atenção no feed.' },
     ] },
 
-  { id: 'logo', t: 'Logo', num: '06', titulo: ['Logos que', 'inspiram'], lead: 'Referências reais de estúdios. Toquem em Amei, Talvez ou Não em cada uma e comente o que chamou atenção. Não precisa gostar de tudo: o que vocês rejeitam também me orienta.',
+  { id: 'logo', t: 'Logo', num: '05', min: 6, titulo: ['Logos que', 'inspiram'], lead: 'Referências reais de estúdios de design. Marque Amei, Talvez ou Não em cada uma e comente o que chamou atenção. O que você rejeita também me ajuda.',
     blocks: [
       { id: 'tipos', type: 'tipos' },
       { id: 'galeria', type: 'galeria', cats: ['nome', 'simbolo', 'monograma', 'selo', 'organico', 'geometrico', 'sistema'] },
+      { id: 'up_logo', type: 'upload', mini: true, opc: true, label: 'Tem algum logo que você gosta? Mande aqui', help: 'Prints de logos de qualquer marca ou área. Escreva o que chamou atenção em cada um.', exc: 'Logo de uma cafeteria de Campinas. Gosto de como a letra é arredondada e simples.' },
     ] },
 
-  { id: 'simbolos', t: 'Símbolos', num: '07', titulo: ['Símbolos', 'e combinações'], lead: 'Estes desenhos são só exemplos de ideias, não o logo final. Marquem o que combina com a clínica. Se quiserem, mais abaixo dá para juntar dois ou três e ver uma ideia nova.',
+  { id: 'simbolos', t: 'Símbolos', num: '06', min: 3, titulo: ['Símbolos', 'e ideias'], lead: 'Estes desenhos são exemplos de ideias, não o logo final. Marque o que combina com a clínica.',
     blocks: [
       { id: 'simb', type: 'simbolos' },
       { id: 'combo', type: 'combo' },
-      { id: 'simbolo_ideia', type: 'textarea', label: 'Existe alguma imagem que tem a ver com a história de vocês?', help: 'Pode ser um objeto, um lugar, uma lembrança da equipe.', ex: 'A janela grande da sala de espera, que dá para um ipê. Todo mundo comenta dela.' },
+      { id: 'simbolo_ideia', type: 'textarea', label: 'Existe alguma imagem ligada à sua história?', help: 'Um objeto, um lugar, uma lembrança.', ex: 'O ipê que vou plantar na frente da clínica. Ou a janela grande da sala de espera.' },
     ] },
 
-  { id: 'cores', t: 'Cores', num: '08', titulo: ['Cores que', 'contam a história'], lead: 'Oito propostas pensadas para uma clínica de psicologia, já aplicadas num cartão e num post. Avaliem cada uma e comentem.',
+  { id: 'cores', t: 'Cores', num: '07', min: 3, titulo: ['Cores que', 'contam a história'], lead: 'Oito propostas pensadas para uma clínica de psicologia, já aplicadas num cartão e num post. Avalie cada uma e comente.',
     blocks: [
       { id: 'paletas', type: 'paletas' },
-      { id: 'cores_nao', type: 'chips', label: 'Alguma cor que vocês NÃO querem de jeito nenhum?', options: ['Vermelho', 'Laranja forte', 'Amarelo', 'Rosa', 'Roxo', 'Azul', 'Verde', 'Marrom', 'Preto', 'Cinza'], outro: true },
-      { id: 'cores_sim', type: 'text', label: 'Alguma cor que precisa estar, por gosto ou história?', ex: 'Um verde, porque a sala tem muitas plantas.' },
+      { id: 'minhapaleta', type: 'minhapaleta', opc: true, label: 'Quer montar a sua própria paleta?', help: 'Toque no + para adicionar uma cor e escolha o tom. Dá para usar até 6 cores.' },
+      { id: 'up_cores', type: 'upload', mini: true, opc: true, label: 'Mande um print de algo com cores que você gosta', help: 'Uma foto, um lugar, uma roupa, um post. Qualquer coisa que tenha a sensação certa.', exc: 'Foto de uma pousada na serra. Gosto do verde escuro com a madeira e o linho cru.' },
+      { id: 'cores_nao', type: 'chips', label: 'Alguma cor que você não quer de jeito nenhum?', options: ['Vermelho', 'Laranja forte', 'Amarelo', 'Rosa', 'Roxo', 'Azul', 'Verde', 'Marrom', 'Preto', 'Cinza'], outro: true },
+      { id: 'cores_sim', type: 'text', label: 'Alguma cor que precisa estar, por gosto ou história?', ex: 'Um verde, porque a sala vai ter muitas plantas.' },
     ] },
 
-  { id: 'fontes', t: 'Letras', num: '09', titulo: ['Letras e', 'a fonte própria'], lead: 'Digite o nome da clínica e veja como ele fica em cada estilo. A fonte própria da marca vai nascer da direção escolhida aqui.',
+  { id: 'fontes', t: 'Letras', num: '08', min: 3, titulo: ['Letras e', 'a fonte própria'], lead: 'Digite o nome da clínica e veja como ele fica em cada estilo. A fonte própria da marca nasce da direção escolhida aqui.',
     blocks: [
       { id: 'fontes', type: 'fontes' },
       { id: 'estilo_fonte', type: 'estilos', label: 'Para a fonte exclusiva da clínica, qual caminho agrada mais?' },
+      { id: 'up_fontes', type: 'upload', mini: true, opc: true, label: 'Tem alguma letra que você gosta? Mande de inspiração', help: 'Print de uma placa, embalagem, revista, logo ou site. Pode ser só um detalhe que chamou atenção.', exc: 'Letreiro de uma livraria. Gosto da letra fina e alta, parece calma e elegante.' },
+      { id: 'fonte_nome', type: 'text', opc: true, label: 'Sabe o nome de alguma fonte que você gosta?', ex: 'Gosto da letra do Spotify e da do Airbnb.' },
     ] },
 
-  { id: 'clima', t: 'Clima', num: '10', titulo: ['O clima', 'das imagens'], lead: 'Ambientes que ajudam a imaginar como a marca vai se sentir no espaço e nas fotos.',
+  { id: 'clima', t: 'Clima', num: '09', min: 2, titulo: ['O clima', 'das imagens'], lead: 'Ambientes reais que ajudam a imaginar como a marca vai se sentir no espaço e nas fotos.',
     blocks: [
       { id: 'galeria_amb', type: 'galeria', cats: ['ambiente'] },
-      { id: 'imagens', type: 'chips', label: 'Que tipo de imagem combina com a clínica?', options: ['Fotos reais da equipe', 'Fotos do espaço', 'Ilustrações', 'Texturas e formas abstratas', 'Natureza e luz', 'Pouca imagem, mais tipografia'], outro: true },
+      { id: 'imagens', type: 'chips', label: 'Que tipo de imagem combina com a clínica?', options: ['Fotos minhas', 'Fotos do espaço', 'Ilustrações', 'Texturas e formas', 'Natureza e luz', 'Pouca imagem, mais texto'], outro: true },
     ] },
 
-  { id: 'referencias', t: 'Suas refs', num: '11', titulo: ['Agora é', 'a vez de vocês'], lead: 'Mandem o que já têm: fotos do espaço, logo antigo, prints de marcas que gostam, rascunhos. E deixem os links de quem admiram.',
+  { id: 'referencias', t: 'Suas refs', num: '10', min: 4, titulo: ['Agora é', 'a sua vez'], lead: 'Mande o que já tem: fotos do espaço, prints de marcas que você gosta, rascunhos. E deixe os links de quem você admira.',
     blocks: [
       { id: 'upload', type: 'upload' },
       { id: 'links', type: 'links' },
-      { id: 'admiram', type: 'textarea', label: 'Marcas que vocês admiram, de qualquer área', help: 'Café, roupa, hotel, outra clínica. Digam o porquê.', ex: 'Aesop, pela calma das lojas. Um hotel pequeno que visitamos, pela recepção que parece sala de estar.' },
-      { id: 'concorrentes', type: 'textarea', label: 'Clínicas da cidade que vocês conhecem', help: 'Quais respeitam e de quais querem se diferenciar.', ex: 'A Clínica X é muito boa, mas a marca é fria, parece hospital. Queremos o oposto.' },
-      { id: 'final', type: 'textarea', label: 'Algo que eu não perguntei e vocês querem dizer?', ex: 'Queremos que a marca funcione bem no Instagram, porque é lá que mais pessoas vão nos conhecer.' },
+      { id: 'admiram', type: 'textarea', label: 'Marcas que você admira, de qualquer área', help: 'Café, roupa, hotel, outra clínica. Diga o porquê.', ex: 'Aesop, pela calma das lojas. Um hotel pequeno que visitei, pela recepção que parece sala de estar.' },
+      { id: 'concorrentes', type: 'textarea', label: 'Clínicas de Itatiba e região que você conhece', help: 'Quais você respeita e de quais quer se diferenciar.', ex: 'A Clínica X é muito boa, mas a marca é fria e parece hospital. Quero o oposto.' },
+      { id: 'final', type: 'textarea', label: 'Algo que eu não perguntei e você quer dizer?', ex: 'Quero que a marca funcione bem no Instagram, porque é lá que mais gente vai me conhecer.' },
     ] },
 
-  { id: 'envio', t: 'Envio', num: '12', titulo: ['Revisar', 'e enviar'] },
+  { id: 'envio', t: 'Envio', num: '11', titulo: ['Revisar', 'e enviar'] },
 ];
 
 const CATS = {
