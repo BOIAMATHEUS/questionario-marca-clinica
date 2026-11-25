@@ -1,0 +1,164 @@
+{
+  "versao": 2,
+  "clinica": "Raízes Psicologia",
+  "quem": "",
+  "zap": "",
+  "enviadoEm": "2026-11-25T13:42:09.870Z",
+  "v": {
+    "nome_status": "tem",
+    "nome": "Raízes Psicologia",
+    "nome_sentido": "Raiz é o que sustenta a árvore sem aparecer. Quero que a terapia seja isso: um lugar firme, por baixo, que ajuda a pessoa a crescer do jeito dela.",
+    "descritor": [
+      "Psicologia Clínica"
+    ],
+    "por_que": "Atendo há seis anos em salas alugadas em Jundiaí e Itatiba. Cansei de mudar de sala e de não ter um espaço com a minha cara. Quero um lugar acolhedor, com plantas, luz natural e tempo de sobra para cada paciente.",
+    "abordagens": [
+      "TCC",
+      "ACT",
+      "Terapia do Esquema"
+    ],
+    "servicos": [
+      "Psicoterapia individual",
+      "Terapia de casal",
+      "Orientação de pais"
+    ],
+    "endereco": "Rua Coronel Camilo Pires, 300, Centro, Itatiba. Casa antiga reformada, com quintal nos fundos.",
+    "modalidade": [
+      "Os dois"
+    ],
+    "inauguracao": "Fevereiro de 2027",
+    "publicos": [
+      "Adolescentes",
+      "Adultos",
+      "Casais"
+    ],
+    "principal": "Adultos de 25 a 40 anos que trabalham muito e estão no limite.",
+    "queixas": "Ansiedade, crise no trabalho, término de relacionamento, autocobrança, dificuldade de dormir.",
+    "persona": "Juliana, 31 anos, analista numa indústria de Itatiba. Faz tudo por todo mundo e nunca para. Tem vergonha de procurar terapia porque acha que é frescura. Vai escolher quem parecer próximo e sério, sem papo de coach.",
+    "pagamento": [
+      "Particular"
+    ],
+    "faixa": 64,
+    "canais": [
+      "Indicação",
+      "Instagram",
+      "Google"
+    ],
+    "frase": "Ajudar a pessoa a entender o próprio jeito de funcionar e a viver com menos peso.",
+    "palavras": [
+      "Acolhimento",
+      "Escuta",
+      "Vínculo"
+    ],
+    "sentir": "Que pode desacelerar. Que ninguém vai julgar. Que está num lugar bonito e cuidado.",
+    "diferencial": "Atendimento sem pressa, retorno por escrito depois da avaliação e uma casa de verdade, não uma sala comercial.",
+    "nunca": [
+      "Hospital ou laboratório",
+      "Coach ou autoajuda",
+      "Mística ou esotérica"
+    ],
+    "p_acolhedora": 22,
+    "p_classica": 62,
+    "p_leve": 38,
+    "p_delicada": 30,
+    "p_minimal": 28,
+    "p_organica": 24,
+    "p_quente": 30,
+    "p_silenciosa": 35,
+    "tipos": [
+      "nome",
+      "organico"
+    ]
+  },
+  "r": {
+    "ref:nome-01": {
+      "v": "amei",
+      "c": "Gosto da letra fina e do espaço em volta."
+    },
+    "ref:nome-02": {
+      "v": "talvez"
+    },
+    "ref:nome-03": {
+      "v": "nao",
+      "c": "Colorido demais pra mim."
+    },
+    "ref:nome-04": {
+      "v": "amei"
+    },
+    "ref:simbolo-01": {
+      "v": "talvez",
+      "c": "Bonito, mas parece marca de spa."
+    },
+    "ref:simbolo-02": {
+      "v": "nao"
+    },
+    "ref:simbolo-03": {
+      "v": "amei",
+      "c": "Gosto da letra fina e do espaço em volta."
+    },
+    "ref:simbolo-04": {
+      "v": "talvez"
+    },
+    "ref:simbolo-05": {
+      "v": "nao",
+      "c": "Colorido demais pra mim."
+    },
+    "ref:monograma-01": {
+      "v": "amei"
+    },
+    "ref:monograma-02": {
+      "v": "talvez",
+      "c": "Bonito, mas parece marca de spa."
+    },
+    "ref:monograma-03": {
+      "v": "nao"
+    },
+    "ref:selo-01": {
+      "v": "amei",
+      "c": "Gosto da letra fina e do espaço em volta."
+    },
+    "ref:selo-02": {
+      "v": "talvez"
+    },
+    "ref:selo-03": {
+      "v": "nao",
+      "c": "Colorido demais pra mim."
+    },
+    "ref:selo-04": {
+      "v": "amei"
+    },
+    "ref:organico-01": {
+      "v": "talvez",
+      "c": "Bonito, mas parece marca de spa."
+    },
+    "ref:organico-02": {
+      "v": "nao"
+    },
+    "ref:organico-03": {
+      "v": "amei",
+      "c": "Gosto da letra fina e do espaço em volta."
+    },
+    "ref:organico-04": {
+      "v": "talvez"
+    },
+    "ref:organico-05": {
+      "v": "nao",
+      "c": "Colorido demais pra mim."
+    },
+    "ref:geometrico-01": {
+      "v": "amei"
+    },
+    "ref:geometrico-02": {
+      "v": "talvez",
+      "c": "Bonito, mas parece marca de spa."
+    },
+    "ref:geometrico-03": {
+      "v": "nao"
+    },
+    "ref:geometrico-04": {
+      "v": "amei"
+    }
+  },
+  "links": [],
+  "arqs": []
+}
