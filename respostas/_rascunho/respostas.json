@@ -3,7 +3,7 @@
   "clinica": "Encandeia",
   "quem": "",
   "zap": "",
-  "enviadoEm": "2026-11-26T02:41:23.114Z",
+  "enviadoEm": "2026-11-26T02:44:23.128Z",
   "v": {
     "nome_status": "tem",
     "nome": "Encandeia ",
@@ -64,7 +64,20 @@
       "Médicos e escolas",
       "Empresas"
     ],
-    "frase": "A clínica vai guiar a pessoa em sofrimento para que ela seja "
+    "frase": "A clínica vai auxiliar o sujeito em sofrimento na construção de um caminhos dentro da sua subjetividade.",
+    "palavras": [
+      "Acolhimento",
+      "Ciência",
+      "Pertencimento"
+    ],
+    "sentir": "Ela deve se sentir abraçada, pelos profissionais que vão desde a recepção até o atendimento, pela estética e a essência da clínica. ",
+    "diferencial": "Espaços para além do atendimento semanal",
+    "nunca": [
+      "Hospital ou laboratório",
+      "Coach ou autoajuda",
+      "Fria e distante",
+      "Infantil demais"
+    ]
   },
   "r": {},
   "links": [],

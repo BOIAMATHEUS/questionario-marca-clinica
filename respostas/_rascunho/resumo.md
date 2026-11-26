@@ -32,7 +32,13 @@ Respondido por: - · WhatsApp: -
 
 == 03 ESSÊNCIA ==
 - Em uma frase: o que a clínica vai fazer pela vida de alguém?
-  A clínica vai guiar a pessoa em sofrimento para que ela seja
+  A clínica vai auxiliar o sujeito em sofrimento na construção de um caminhos dentro da sua subjetividade.
+- Escolha até 3 palavras que são a cara da clínica Acolhimento, Ciência, Pertencimento
+- O que a pessoa deve sentir ao entrar na clínica?
+  Ela deve se sentir abraçada, pelos profissionais que vão desde a recepção até o atendimento, pela estética e a essência da clínica.
+- O que a sua clínica vai ter que as outras de Itatiba não têm?
+  Espaços para além do atendimento semanal
+- A clínica nunca pode parecer... Hospital ou laboratório, Coach ou autoajuda, Fria e distante, Infantil demais
 
 == 04 PERSONALIDADE ==
 
