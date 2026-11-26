@@ -3,7 +3,7 @@
   "clinica": "Encandeia",
   "quem": "",
   "zap": "",
-  "enviadoEm": "2026-11-26T02:50:23.156Z",
+  "enviadoEm": "2026-11-26T02:53:54.108Z",
   "v": {
     "nome_status": "tem",
     "nome": "Encandeia ",
@@ -98,7 +98,25 @@
       "#F4F0E6",
       "#B9684B"
     ],
-    "mp_c": "Verde (babosa ou areia apresentado),  palha e terracota em superficialidade. São as cores que vamos pintar o imóvel, que transmite brasilidade, casa antiga. "
+    "mp_c": "Verde (babosa ou areia apresentado),  palha e terracota em superficialidade. São as cores que vamos pintar o imóvel, que transmite brasilidade, casa antiga. ",
+    "cores_nao": [
+      "Vermelho",
+      "Laranja forte",
+      "Amarelo",
+      "Rosa",
+      "Roxo",
+      "Marrom",
+      "Preto",
+      "Cinza",
+      "Azul"
+    ],
+    "cores_sim": "Verde ",
+    "estilo_fonte": "humanista",
+    "imagens": [
+      "Natureza e luz",
+      "Texturas e formas",
+      "Ilustrações"
+    ]
   },
   "r": {
     "ref:nome-01": {
@@ -196,6 +214,48 @@
     },
     "pal:aurora": {
       "v": "nao"
+    },
+    "fnt:cormorant": {
+      "v": "talvez"
+    },
+    "fnt:fraunces": {
+      "v": "nao"
+    },
+    "fnt:quicksand": {
+      "v": "nao"
+    },
+    "fnt:outfit": {
+      "v": "nao"
+    },
+    "fnt:bricolage": {
+      "v": "nao"
+    },
+    "fnt:instrument": {
+      "v": "nao"
+    },
+    "fnt:gloock": {
+      "v": "nao"
+    },
+    "fnt:manuscrita": {
+      "v": "nao"
+    },
+    "ref:ambiente-01": {
+      "v": "amei"
+    },
+    "ref:ambiente-02": {
+      "v": "amei"
+    },
+    "ref:ambiente-03": {
+      "v": "nao"
+    },
+    "ref:ambiente-04": {
+      "v": "nao"
+    },
+    "ref:ambiente-05": {
+      "v": "nao"
+    },
+    "ref:ambiente-06": {
+      "v": "amei"
     }
   },
   "links": [],

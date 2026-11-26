@@ -69,11 +69,20 @@ Respondido por: - · WhatsApp: -
   Talvez: Terracota acolhedora; Verde profundo e areia
   Não: Azul sereno; Lavanda e pedra; Neutros quentes; Contraste contemporâneo; Aurora suave
 - Paleta própria: #7E9077, #F4F0E6, #B9684B · Verde (babosa ou areia apresentado),  palha e terracota em superficialidade. São as cores que vamos pintar o imóvel, que transmite brasilidade, casa antiga.
+- Alguma cor que você não quer de jeito nenhum? Vermelho, Laranja forte, Amarelo, Rosa, Roxo, Marrom, Preto, Cinza, Azul
+- Alguma cor que precisa estar, por gosto ou história?
+  Verde
 
 == 08 LETRAS ==
 - Fontes:
+  Talvez: Serifa elegante (Cormorant Garamond + Manrope)
+  Não: Serifa acolhedora (Fraunces + DM Sans); Arredondada leve (Quicksand + Nunito Sans); Geométrica moderna (Outfit + Inter); Grotesca contemporânea (Bricolage Grotesque + Instrument Sans); Editorial (Instrument Serif + Figtree); Serifa marcante (Gloock + Work Sans); Com toque à mão (Fraunces + Caveat + DM Sans)
+- Estilo da fonte própria: Traço humano
 
 == 09 CLIMA ==
 - Referências (Ambientes):
+  Amei: [Ambientes] Discorrer, Consultation Rooms · Pip Seger <https://www.behance.net/gallery/192206021/Discorrer-Consultation-Rooms-Design-Day>; [Ambientes] Sala de espera em terracota · não identificado (Pinterest) <https://br.pinterest.com/pin/18929260940714927/>; [Ambientes] Consultório simples com luz natural · não identificado (Pinterest) <https://br.pinterest.com/pin/684195368415793831/>
+  Não: [Ambientes] Consultório claro com verde sálvia · não identificado (Pinterest) <https://br.pinterest.com/pin/231653974579187305/>; [Ambientes] Consultório minimalista · não identificado (Pinterest, via Behance) <https://br.pinterest.com/pin/326088829278198201/>; [Ambientes] Recepção com sofá terracota · não identificado (Pinterest) <https://br.pinterest.com/pin/72620612736765374/>
+- Que tipo de imagem combina com a clínica? Natureza e luz, Texturas e formas, Ilustrações
 
 == 10 SUAS REFS ==
