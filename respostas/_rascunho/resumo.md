@@ -21,9 +21,18 @@ Respondido por: - · WhatsApp: -
 == 02 PÚBLICO ==
 - Quem você pretende atender? Crianças, Adolescentes, Idosos, LGBTQIAPN+, Gestantes e puérperas, Neurodivergentes, Casais, Empresas, Famílias, Adultos
 - Se tivesse que escolher um público principal, qual seria?
-  Adulto médio e seus filhos
+  Adulto médio e filhos de adultos médios
+- Com o que você imagina que as pessoas vão chegar?
+  Busca por autoconhecimento, ansiedade em resolver problemas de cotidiano e sintomas deprimidos.
+- Descreva o paciente que você quer receber
+  .
+- Como pretende cobrar? Particular e convênio
+- Como você quer se posicionar em preço em Itatiba? Acessível ↔ Premium: 58/100 (Equilíbrio entre os dois)
+- Por onde você imagina que os pacientes vão chegar? Indicação, Instagram, Google, Convênio, Médicos e escolas, Empresas
 
 == 03 ESSÊNCIA ==
+- Em uma frase: o que a clínica vai fazer pela vida de alguém?
+  A clínica vai guiar a pessoa em sofrimento para que ela seja
 
 == 04 PERSONALIDADE ==
 

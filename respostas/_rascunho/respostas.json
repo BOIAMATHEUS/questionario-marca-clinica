@@ -3,7 +3,7 @@
   "clinica": "Encandeia",
   "quem": "",
   "zap": "",
-  "enviadoEm": "2026-11-26T02:38:23.101Z",
+  "enviadoEm": "2026-11-26T02:41:23.114Z",
   "v": {
     "nome_status": "tem",
     "nome": "Encandeia ",
@@ -49,7 +49,22 @@
       "Famílias",
       "Adultos"
     ],
-    "principal": "Adulto médio e seus filhos"
+    "principal": "Adulto médio e filhos de adultos médios ",
+    "queixas": "Busca por autoconhecimento, ansiedade em resolver problemas de cotidiano e sintomas deprimidos.",
+    "persona": ".",
+    "pagamento": [
+      "Particular e convênio"
+    ],
+    "faixa": 58,
+    "canais": [
+      "Indicação",
+      "Instagram",
+      "Google",
+      "Convênio",
+      "Médicos e escolas",
+      "Empresas"
+    ],
+    "frase": "A clínica vai guiar a pessoa em sofrimento para que ela seja "
   },
   "r": {},
   "links": [],
