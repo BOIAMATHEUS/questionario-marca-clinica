@@ -59,10 +59,16 @@ Respondido por: - · WhatsApp: -
 
 == 06 SÍMBOLOS ==
 - Símbolos:
-  Não: Letra Ψ (psi); Cérebro; Cabeça de perfil; Borboleta
+  Não: Letra Ψ (psi); Cérebro; Cabeça de perfil; Borboleta; Árvore; Folha ou broto; Quebra-cabeça; Mãos; Coração; Casa ou abrigo; Onda ou água; Sol nascendo; Porta ou caminho; Elos ou círculos unidos; Espiral; Forma abstrata própria
+- Existe alguma imagem ligada à sua história?
+  Acredito que figuras relacionadas ao nome da clínica
 
 == 07 CORES ==
 - Paletas:
+  Amei: Sálvia e linho
+  Talvez: Terracota acolhedora; Verde profundo e areia
+  Não: Azul sereno; Lavanda e pedra; Neutros quentes; Contraste contemporâneo; Aurora suave
+- Paleta própria: #7E9077, #F4F0E6, #B9684B · Verde (babosa ou areia apresentado),  palha e terracota em superficialidade. São as cores que vamos pintar o imóvel, que transmite brasilidade, casa antiga.
 
 == 08 LETRAS ==
 - Fontes:

@@ -3,7 +3,7 @@
   "clinica": "Encandeia",
   "quem": "",
   "zap": "",
-  "enviadoEm": "2026-11-26T02:47:23.142Z",
+  "enviadoEm": "2026-11-26T02:50:23.156Z",
   "v": {
     "nome_status": "tem",
     "nome": "Encandeia ",
@@ -91,7 +91,14 @@
     "p_silenciosa": 40,
     "tipos": [
       "organico"
-    ]
+    ],
+    "simbolo_ideia": "Acredito que figuras relacionadas ao nome da clínica ",
+    "minha_paleta": [
+      "#7E9077",
+      "#F4F0E6",
+      "#B9684B"
+    ],
+    "mp_c": "Verde (babosa ou areia apresentado),  palha e terracota em superficialidade. São as cores que vamos pintar o imóvel, que transmite brasilidade, casa antiga. "
   },
   "r": {
     "ref:nome-01": {
@@ -128,6 +135,66 @@
       "v": "nao"
     },
     "simb:borboleta": {
+      "v": "nao"
+    },
+    "simb:arvore": {
+      "v": "nao"
+    },
+    "simb:folha": {
+      "v": "nao"
+    },
+    "simb:maos": {
+      "v": "nao"
+    },
+    "simb:quebra": {
+      "v": "nao"
+    },
+    "simb:coracao": {
+      "v": "nao"
+    },
+    "simb:casa": {
+      "v": "nao"
+    },
+    "simb:sol": {
+      "v": "nao"
+    },
+    "simb:onda": {
+      "v": "nao"
+    },
+    "simb:porta": {
+      "v": "nao"
+    },
+    "simb:elo": {
+      "v": "nao"
+    },
+    "simb:abstrato": {
+      "v": "nao"
+    },
+    "simb:espiral": {
+      "v": "nao"
+    },
+    "pal:salvia": {
+      "v": "amei"
+    },
+    "pal:terracota": {
+      "v": "talvez"
+    },
+    "pal:sereno": {
+      "v": "nao"
+    },
+    "pal:lavanda": {
+      "v": "nao"
+    },
+    "pal:profundo": {
+      "v": "talvez"
+    },
+    "pal:neutros": {
+      "v": "nao"
+    },
+    "pal:contraste": {
+      "v": "nao"
+    },
+    "pal:aurora": {
       "v": "nao"
     }
   },
