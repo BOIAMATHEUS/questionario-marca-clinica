@@ -3,7 +3,7 @@
   "clinica": "Encandeia",
   "quem": "",
   "zap": "",
-  "enviadoEm": "2026-11-26T02:44:23.128Z",
+  "enviadoEm": "2026-11-26T02:47:23.142Z",
   "v": {
     "nome_status": "tem",
     "nome": "Encandeia ",
@@ -76,10 +76,61 @@
       "Hospital ou laboratório",
       "Coach ou autoajuda",
       "Fria e distante",
-      "Infantil demais"
+      "Infantil demais",
+      "Igual a todas as outras",
+      "Barata ou improvisada"
+    ],
+    "nunca__outro": "A clínica deve transmitir a essência de brasilidade ",
+    "p_acolhedora": 31,
+    "p_classica": 25,
+    "p_leve": 28,
+    "p_delicada": 30,
+    "p_minimal": 52,
+    "p_organica": 37,
+    "p_quente": 33,
+    "p_silenciosa": 40,
+    "tipos": [
+      "organico"
     ]
   },
-  "r": {},
+  "r": {
+    "ref:nome-01": {
+      "v": "amei"
+    },
+    "ref:nome-02": {
+      "v": "nao"
+    },
+    "ref:nome-03": {
+      "v": "talvez"
+    },
+    "ref:nome-04": {
+      "v": "nao"
+    },
+    "ref:nome-05": {
+      "v": "nao"
+    },
+    "ref:nome-06": {
+      "v": "nao"
+    },
+    "ref:nome-07": {
+      "v": "nao"
+    },
+    "ref:nome-08": {
+      "v": "nao"
+    },
+    "simb:psi": {
+      "v": "nao"
+    },
+    "simb:cerebro": {
+      "v": "nao"
+    },
+    "simb:cabeca": {
+      "v": "nao"
+    },
+    "simb:borboleta": {
+      "v": "nao"
+    }
+  },
   "links": [],
   "arqs": []
 }

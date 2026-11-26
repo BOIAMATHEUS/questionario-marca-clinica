@@ -38,15 +38,28 @@ Respondido por: - · WhatsApp: -
   Ela deve se sentir abraçada, pelos profissionais que vão desde a recepção até o atendimento, pela estética e a essência da clínica.
 - O que a sua clínica vai ter que as outras de Itatiba não têm?
   Espaços para além do atendimento semanal
-- A clínica nunca pode parecer... Hospital ou laboratório, Coach ou autoajuda, Fria e distante, Infantil demais
+- A clínica nunca pode parecer... Hospital ou laboratório, Coach ou autoajuda, Fria e distante, Infantil demais, Igual a todas as outras, Barata ou improvisada, A clínica deve transmitir a essência de brasilidade 
 
 == 04 PERSONALIDADE ==
+- Acolhedora ↔ Técnica: 31/100 (Mais acolhedora)
+- Clássica ↔ Atual: 25/100 (Mais clássica)
+- Leve ↔ Séria: 28/100 (Mais leve)
+- Delicada ↔ Marcante: 30/100 (Mais delicada)
+- Minimalista ↔ Detalhada: 52/100 (Equilíbrio entre os dois)
+- Orgânica ↔ Geométrica: 37/100 (Mais orgânica)
+- Quente ↔ Fria: 33/100 (Mais quente)
+- Discreta ↔ Expressiva: 40/100 (Mais discreta)
 
 == 05 LOGO ==
+- Tipos de logo: Orgânico
 - Referências (Só o nome, Símbolo e nome, Monograma, Selo ou emblema, Orgânico, Geométrico, Marca aplicada):
+  Amei: [Só o nome] Insight Therapy · Aamena Elhossamy <https://www.behance.net/gallery/136597253/Insight-therapy>
+  Talvez: [Só o nome] Psicóloga Malu Moura · Lauro Lopes <https://www.behance.net/gallery/206099989/Psicologa-Malu-Moura>
+  Não: [Só o nome] ECHO Clinical Psychology Studio · Beatrice Bianchet <https://www.behance.net/gallery/191959101/ECHO-clinical-psychology-studio>; [Só o nome] Marra Therapy · Studio Murnane <https://www.behance.net/gallery/235828843/Marra-Therapy>; [Só o nome] Elsa Psicóloga · José Carlos Álvarez <https://www.behance.net/gallery/245554019/Elsa-Psicologa-Branding>; [Só o nome] Seneria Wellness · Khaled Farhad (Brandsquare) <https://www.behance.net/gallery/249613849/Seneria-Luxury-Massage-Therapy-Branding-by-Brandsquare>; [Só o nome] Caroline Barra, Psicóloga · Vinícius Machado <https://www.behance.net/gallery/254903933/Branding-para-Psicologa-Alternativa>; [Só o nome] Genie Healthcare · Denormalized <https://www.behance.net/gallery/254872463/Genie-Healthcare>
 
 == 06 SÍMBOLOS ==
 - Símbolos:
+  Não: Letra Ψ (psi); Cérebro; Cabeça de perfil; Borboleta
 
 == 07 CORES ==
 - Paletas:
