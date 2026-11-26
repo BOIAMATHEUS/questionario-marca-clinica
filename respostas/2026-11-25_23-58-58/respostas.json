@@ -1,0 +1,391 @@
+{
+  "versao": 2,
+  "clinica": "Encandeia",
+  "quem": "Vinicius da costa vaz ",
+  "zap": "11921299364",
+  "enviadoEm": "2026-11-26T02:58:58.544Z",
+  "v": {
+    "nome_status": "tem",
+    "nome": "Encandeia ",
+    "nome_sentido": "Pra mim, Encandeia tem muito a ver com luz, mas não aquela ideia de estar sempre bem ou feliz. Tem a ver com se encontrar, se conhecer e conseguir enxergar as coisas de outras formas. Também gosto muito da referência à música do Zeca Pagodinho, porque traz uma brasilidade, uma alegria e uma leveza que acho que o nome quer transmitir. Gosto dessa mistura: um espaço que acolhe as dores, mas que também valoriza a vida, os encontros, a espontaneidade e tudo aquilo que nos faz humanos.",
+    "descritor__outro": "Espaço Terapêutico ",
+    "por_que": "Depois de presenciar a formação de uma clínica essencialmente voltada ao enriquecimento próprio, que ignorava os contextos social, político e subjetivo em que estamos inseridos, a ideia é construir algo diferente.\n\nA proposta é que a clínica seja, acima de tudo, um ponto de encontro, convivência, troca e formação profissional. Um espaço de crescimento e evolução, que também seja financeiramente sustentável, é claro. A clínica não pode se resumir a profissionais atendendo a portas fechadas, recebendo por isso e indo embora para casa. Ela precisa ser um espaço vivo, de construção coletiva, circulação de ideias, aprendizado e transformação. Um lugar onde a psicologia não se desconecte da realidade e de tudo aquilo que atravessa a vida das pessoas.",
+    "abordagens": [
+      "TCC",
+      "Psicanálise",
+      "Humanista / ACP",
+      "Gestalt",
+      "Sistêmica",
+      "Análise do Comportamento",
+      "ACT",
+      "Terapia do Esquema",
+      "Junguiana",
+      "EMDR"
+    ],
+    "servicos": [
+      "Psicoterapia individual",
+      "Terapia familiar",
+      "Terapia de casal",
+      "Atendimento infantil",
+      "Avaliação psicológica",
+      "Orientação de pais",
+      "Grupos terapêuticos",
+      "Palestras e empresas"
+    ],
+    "endereco": "Avenida Senador Lacerda Franco, 51 - Centro - Itatiba",
+    "modalidade": [
+      "Os dois"
+    ],
+    "inauguracao": "Em 15 dias ",
+    "publicos": [
+      "Crianças",
+      "Adolescentes",
+      "Idosos",
+      "LGBTQIAPN+",
+      "Gestantes e puérperas",
+      "Neurodivergentes",
+      "Casais",
+      "Empresas",
+      "Famílias",
+      "Adultos"
+    ],
+    "principal": "Adulto médio e filhos de adultos médios ",
+    "queixas": "Busca por autoconhecimento, ansiedade em resolver problemas de cotidiano e sintomas deprimidos.",
+    "persona": ".",
+    "pagamento": [
+      "Particular e convênio"
+    ],
+    "faixa": 58,
+    "canais": [
+      "Indicação",
+      "Instagram",
+      "Google",
+      "Convênio",
+      "Médicos e escolas",
+      "Empresas"
+    ],
+    "frase": "A clínica vai auxiliar o sujeito em sofrimento na construção de um caminhos dentro da sua subjetividade.",
+    "palavras": [
+      "Acolhimento",
+      "Ciência",
+      "Pertencimento"
+    ],
+    "sentir": "Ela deve se sentir abraçada, pelos profissionais que vão desde a recepção até o atendimento, pela estética e a essência da clínica. ",
+    "diferencial": "Espaços para além do atendimento semanal",
+    "nunca": [
+      "Hospital ou laboratório",
+      "Coach ou autoajuda",
+      "Fria e distante",
+      "Infantil demais",
+      "Igual a todas as outras",
+      "Barata ou improvisada"
+    ],
+    "nunca__outro": "A clínica deve transmitir a essência de brasilidade ",
+    "p_acolhedora": 31,
+    "p_classica": 25,
+    "p_leve": 28,
+    "p_delicada": 30,
+    "p_minimal": 52,
+    "p_organica": 37,
+    "p_quente": 33,
+    "p_silenciosa": 40,
+    "tipos": [
+      "organico"
+    ],
+    "simbolo_ideia": "Acredito que figuras relacionadas ao nome da clínica ",
+    "minha_paleta": [
+      "#7E9077",
+      "#F4F0E6",
+      "#B9684B"
+    ],
+    "mp_c": "Verde (babosa ou areia apresentado),  palha e terracota em superficialidade. São as cores que vamos pintar o imóvel, que transmite brasilidade, casa antiga. ",
+    "cores_nao": [
+      "Vermelho",
+      "Laranja forte",
+      "Amarelo",
+      "Rosa",
+      "Roxo",
+      "Marrom",
+      "Preto",
+      "Cinza",
+      "Azul"
+    ],
+    "cores_sim": "Verde ",
+    "estilo_fonte": "humanista",
+    "imagens": [
+      "Natureza e luz",
+      "Texturas e formas",
+      "Ilustrações"
+    ],
+    "concorrentes": "Quero uma coisa bem original e brasileira ",
+    "quem": "Vinicius da costa vaz ",
+    "zap": "11921299364"
+  },
+  "r": {
+    "ref:nome-01": {
+      "v": "amei"
+    },
+    "ref:nome-02": {
+      "v": "nao"
+    },
+    "ref:nome-03": {
+      "v": "talvez"
+    },
+    "ref:nome-04": {
+      "v": "nao"
+    },
+    "ref:nome-05": {
+      "v": "nao"
+    },
+    "ref:nome-06": {
+      "v": "nao"
+    },
+    "ref:nome-07": {
+      "v": "nao"
+    },
+    "ref:nome-08": {
+      "v": "nao"
+    },
+    "simb:psi": {
+      "v": "nao"
+    },
+    "simb:cerebro": {
+      "v": "nao"
+    },
+    "simb:cabeca": {
+      "v": "nao"
+    },
+    "simb:borboleta": {
+      "v": "nao"
+    },
+    "simb:arvore": {
+      "v": "nao"
+    },
+    "simb:folha": {
+      "v": "nao"
+    },
+    "simb:maos": {
+      "v": "nao"
+    },
+    "simb:quebra": {
+      "v": "nao"
+    },
+    "simb:coracao": {
+      "v": "nao"
+    },
+    "simb:casa": {
+      "v": "nao"
+    },
+    "simb:sol": {
+      "v": "nao"
+    },
+    "simb:onda": {
+      "v": "nao"
+    },
+    "simb:porta": {
+      "v": "nao"
+    },
+    "simb:elo": {
+      "v": "nao"
+    },
+    "simb:abstrato": {
+      "v": "nao"
+    },
+    "simb:espiral": {
+      "v": "nao"
+    },
+    "pal:salvia": {
+      "v": "amei"
+    },
+    "pal:terracota": {
+      "v": "talvez"
+    },
+    "pal:sereno": {
+      "v": "nao"
+    },
+    "pal:lavanda": {
+      "v": "nao"
+    },
+    "pal:profundo": {
+      "v": "talvez"
+    },
+    "pal:neutros": {
+      "v": "nao"
+    },
+    "pal:contraste": {
+      "v": "nao"
+    },
+    "pal:aurora": {
+      "v": "nao"
+    },
+    "fnt:cormorant": {
+      "v": "talvez"
+    },
+    "fnt:fraunces": {
+      "v": "nao"
+    },
+    "fnt:quicksand": {
+      "v": "nao"
+    },
+    "fnt:outfit": {
+      "v": "nao"
+    },
+    "fnt:bricolage": {
+      "v": "nao"
+    },
+    "fnt:instrument": {
+      "v": "nao"
+    },
+    "fnt:gloock": {
+      "v": "nao"
+    },
+    "fnt:manuscrita": {
+      "v": "nao"
+    },
+    "ref:ambiente-01": {
+      "v": "amei"
+    },
+    "ref:ambiente-02": {
+      "v": "amei"
+    },
+    "ref:ambiente-03": {
+      "v": "nao"
+    },
+    "ref:ambiente-04": {
+      "v": "nao"
+    },
+    "ref:ambiente-05": {
+      "v": "nao"
+    },
+    "ref:ambiente-06": {
+      "v": "amei"
+    },
+    "ref:simbolo-01": {
+      "v": "nao"
+    },
+    "ref:simbolo-02": {
+      "v": "nao"
+    },
+    "ref:simbolo-03": {
+      "v": "nao"
+    },
+    "ref:simbolo-04": {
+      "v": "nao"
+    },
+    "ref:simbolo-05": {
+      "v": "nao"
+    },
+    "ref:simbolo-06": {
+      "v": "nao"
+    },
+    "ref:simbolo-07": {
+      "v": "nao"
+    },
+    "ref:monograma-01": {
+      "v": "nao"
+    },
+    "ref:monograma-02": {
+      "v": "nao"
+    },
+    "ref:monograma-03": {
+      "v": "talvez"
+    },
+    "ref:monograma-04": {
+      "v": "nao"
+    },
+    "ref:monograma-05": {
+      "v": "nao"
+    },
+    "ref:monograma-06": {
+      "v": "nao"
+    },
+    "ref:selo-06": {
+      "v": "nao"
+    },
+    "ref:selo-07": {
+      "v": "nao"
+    },
+    "ref:selo-08": {
+      "v": "nao"
+    },
+    "ref:organico-01": {
+      "v": "talvez"
+    },
+    "ref:organico-02": {
+      "v": "nao"
+    },
+    "ref:organico-03": {
+      "v": "talvez"
+    },
+    "ref:organico-04": {
+      "v": "talvez"
+    },
+    "ref:organico-05": {
+      "v": "nao"
+    },
+    "ref:organico-06": {
+      "v": "nao"
+    },
+    "ref:organico-07": {
+      "v": "nao"
+    },
+    "ref:organico-08": {
+      "v": "nao"
+    },
+    "ref:geometrico-01": {
+      "v": "nao"
+    },
+    "ref:geometrico-02": {
+      "v": "nao"
+    },
+    "ref:geometrico-03": {
+      "v": "nao"
+    },
+    "ref:geometrico-04": {
+      "v": "nao"
+    },
+    "ref:geometrico-05": {
+      "v": "nao"
+    },
+    "ref:geometrico-06": {
+      "v": "nao"
+    },
+    "ref:geometrico-07": {
+      "v": "nao"
+    },
+    "ref:geometrico-08": {
+      "v": "nao"
+    },
+    "ref:sistema-08": {
+      "v": "nao"
+    },
+    "ref:sistema-01": {
+      "v": "nao"
+    },
+    "ref:sistema-02": {
+      "v": "talvez"
+    },
+    "ref:sistema-03": {
+      "v": "nao"
+    },
+    "ref:sistema-04": {
+      "v": "nao"
+    },
+    "ref:sistema-05": {
+      "v": "talvez"
+    },
+    "ref:sistema-06": {
+      "v": "talvez"
+    },
+    "ref:sistema-07": {
+      "v": "talvez"
+    }
+  },
+  "links": [
+    {
+      "u": "https://vt.tiktok.com/ZSsNLMkRa/ ",
+      "c": ""
+    }
+  ],
+  "arqs": []
+}
