@@ -3,7 +3,7 @@
   "clinica": "Encandeia",
   "quem": "",
   "zap": "",
-  "enviadoEm": "2026-11-26T02:53:54.108Z",
+  "enviadoEm": "2026-11-26T02:56:54.121Z",
   "v": {
     "nome_status": "tem",
     "nome": "Encandeia ",
@@ -116,7 +116,8 @@
       "Natureza e luz",
       "Texturas e formas",
       "Ilustrações"
-    ]
+    ],
+    "concorrentes": "Quero uma coisa bem original e brasileira "
   },
   "r": {
     "ref:nome-01": {
@@ -256,8 +257,70 @@
     },
     "ref:ambiente-06": {
       "v": "amei"
+    },
+    "ref:simbolo-01": {
+      "v": "nao"
+    },
+    "ref:simbolo-02": {
+      "v": "nao"
+    },
+    "ref:simbolo-03": {
+      "v": "nao"
+    },
+    "ref:simbolo-04": {
+      "v": "nao"
+    },
+    "ref:simbolo-05": {
+      "v": "nao"
+    },
+    "ref:simbolo-06": {
+      "v": "nao"
+    },
+    "ref:simbolo-07": {
+      "v": "nao"
+    },
+    "ref:monograma-01": {
+      "v": "nao"
+    },
+    "ref:monograma-02": {
+      "v": "nao"
+    },
+    "ref:monograma-03": {
+      "v": "talvez"
+    },
+    "ref:monograma-04": {
+      "v": "nao"
+    },
+    "ref:monograma-05": {
+      "v": "nao"
+    },
+    "ref:monograma-06": {
+      "v": "nao"
+    },
+    "ref:selo-06": {
+      "v": "nao"
+    },
+    "ref:selo-07": {
+      "v": "nao"
+    },
+    "ref:selo-08": {
+      "v": "nao"
+    },
+    "ref:organico-01": {
+      "v": "talvez"
+    },
+    "ref:organico-02": {
+      "v": "nao"
+    },
+    "ref:organico-03": {
+      "v": "talvez"
     }
   },
-  "links": [],
+  "links": [
+    {
+      "u": "https://vt.tiktok.com/ZSsNLMkRa/ ",
+      "c": ""
+    }
+  ],
   "arqs": []
 }
