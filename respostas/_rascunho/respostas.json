@@ -1,9 +1,9 @@
 {
   "versao": 2,
   "clinica": "Encandeia",
-  "quem": "",
-  "zap": "",
-  "enviadoEm": "2026-11-26T02:56:54.121Z",
+  "quem": "Vinicius da costa vaz ",
+  "zap": "11921299364",
+  "enviadoEm": "2026-11-26T03:17:01.990Z",
   "v": {
     "nome_status": "tem",
     "nome": "Encandeia ",
@@ -117,7 +117,9 @@
       "Texturas e formas",
       "Ilustrações"
     ],
-    "concorrentes": "Quero uma coisa bem original e brasileira "
+    "concorrentes": "Quero uma coisa bem original e brasileira ",
+    "quem": "Vinicius da costa vaz ",
+    "zap": "11921299364"
   },
   "r": {
     "ref:nome-01": {
@@ -313,6 +315,69 @@
       "v": "nao"
     },
     "ref:organico-03": {
+      "v": "talvez"
+    },
+    "ref:organico-04": {
+      "v": "talvez"
+    },
+    "ref:organico-05": {
+      "v": "nao"
+    },
+    "ref:organico-06": {
+      "v": "nao"
+    },
+    "ref:organico-07": {
+      "v": "nao"
+    },
+    "ref:organico-08": {
+      "v": "nao"
+    },
+    "ref:geometrico-01": {
+      "v": "nao"
+    },
+    "ref:geometrico-02": {
+      "v": "nao"
+    },
+    "ref:geometrico-03": {
+      "v": "nao"
+    },
+    "ref:geometrico-04": {
+      "v": "nao"
+    },
+    "ref:geometrico-05": {
+      "v": "nao"
+    },
+    "ref:geometrico-06": {
+      "v": "nao"
+    },
+    "ref:geometrico-07": {
+      "v": "nao"
+    },
+    "ref:geometrico-08": {
+      "v": "nao"
+    },
+    "ref:sistema-08": {
+      "v": "nao"
+    },
+    "ref:sistema-01": {
+      "v": "nao"
+    },
+    "ref:sistema-02": {
+      "v": "talvez"
+    },
+    "ref:sistema-03": {
+      "v": "nao"
+    },
+    "ref:sistema-04": {
+      "v": "nao"
+    },
+    "ref:sistema-05": {
+      "v": "talvez"
+    },
+    "ref:sistema-06": {
+      "v": "talvez"
+    },
+    "ref:sistema-07": {
       "v": "talvez"
     }
   },
